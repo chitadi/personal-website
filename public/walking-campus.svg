@@ -1,0 +1,15 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="800" rx="36" fill="#F8F2E8"/>
+  <rect x="54" y="54" width="1092" height="692" rx="30" fill="#E5D5BF"/>
+  <path d="M0 650C138 586 260 562 366 578C500 597 548 674 694 688C842 702 980 612 1200 560V800H0V650Z" fill="#C6A98A"/>
+  <path d="M136 310C238 214 346 198 468 262C572 316 670 316 760 262C844 212 944 214 1062 320" stroke="#9F7A5E" stroke-width="18" stroke-linecap="round"/>
+  <path d="M580 418L558 524L604 612L632 724" stroke="#5A4332" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M560 524L496 610L470 720" stroke="#5A4332" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M570 472L498 516" stroke="#5A4332" stroke-width="16" stroke-linecap="round"/>
+  <path d="M588 470L654 524" stroke="#5A4332" stroke-width="16" stroke-linecap="round"/>
+  <circle cx="592" cy="374" r="46" fill="#5A4332"/>
+  <text x="90" y="120" fill="#6D5543" font-family="Georgia, serif" font-size="42" letter-spacing="4">
+    CAMPUS LOOP
+  </text>
+</svg>
+
