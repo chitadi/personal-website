@@ -431,6 +431,7 @@ textarea {
 
 .social-card {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   gap: 18px;
   padding: 22px 24px;
@@ -443,9 +444,53 @@ textarea {
   transform: translateY(-2px);
 }
 
+.social-card__lead {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.social-card__icon {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(103, 71, 51, 0.12);
+  border-radius: 14px;
+  background: rgba(255, 252, 247, 0.72);
+  color: var(--ink);
+}
+
+.social-card__icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.social-card__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.social-card__label {
+  color: var(--ink);
+  font-size: 0.96rem;
+}
+
 .social-card strong {
   color: var(--ink);
   font-weight: 600;
+  font-size: 0.94rem;
+  overflow-wrap: anywhere;
+}
+
+.social-card__arrow {
+  flex-shrink: 0;
+  color: var(--muted);
+  font-size: 1rem;
 }
 
 .detail-page {

@@ -2,6 +2,7 @@ import Image from "next/image";
 
 import { JsonLd } from "@/components/json-ld";
 import { SectionCard } from "@/components/section-card";
+import { SocialIcon } from "@/components/social-icon";
 import {
   education,
   hero,
@@ -207,7 +208,7 @@ export default function HomePage() {
           <div className="section-header">
             <p className="section-header__eyebrow">Socials</p>
             <h2 id="socials-title" className="section-header__title">
-              Find me elsewhere, or replace these placeholders with your final links.
+              Find me elsewhere.
             </h2>
           </div>
 
@@ -220,8 +221,18 @@ export default function HomePage() {
                 target={item.href.startsWith("mailto:") ? undefined : "_blank"}
                 rel={item.href.startsWith("mailto:") ? undefined : "noreferrer"}
               >
-                <span>{item.label}</span>
-                <strong>{item.handle}</strong>
+                <span className="social-card__lead">
+                  <span className="social-card__icon">
+                    <SocialIcon icon={item.icon} />
+                  </span>
+                  <span className="social-card__copy">
+                    <span className="social-card__label">{item.label}</span>
+                    <strong>{item.handle}</strong>
+                  </span>
+                </span>
+                <span className="social-card__arrow" aria-hidden="true">
+                  ↗
+                </span>
               </a>
             ))}
           </div>

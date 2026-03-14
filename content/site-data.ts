@@ -1,7 +1,15 @@
+export type SocialIconName =
+  | "scholar"
+  | "linkedin"
+  | "instagram"
+  | "x"
+  | "email";
+
 export type SocialLink = {
   label: string;
   href: string;
   handle: string;
+  icon: SocialIconName;
 };
 
 export type EntryLink = {
@@ -61,7 +69,7 @@ export const siteConfig = {
   title: "Engineer, researcher, and builder",
   description:
     "A warm, editorial personal website about work, projects, research, and the long walks that tie it all together.",
-  email: "hello@replace-this.dev",
+  email: "chittemadithya@gmail.com",
 };
 
 export const hero = {
@@ -277,24 +285,40 @@ export const walkingItems: WalkingItem[] = [
 
 export const socialLinks: SocialLink[] = [
   {
+    label: "Google Scholar",
+    href: "https://scholar.google.com/citations?hl=en&view_op=list_works&gmla=AF9nlQs5uIPZjmlFs_joHg0PR-XgO29AnImS6pA9le5gh0ZrOBk1b8gR_vQeO77sjdXrGgtr5pqFqkPp8aanmb5iyrwQJVBQDXV7aUPNG5E&user=iLp7izgAAAAJ",
+    handle: "scholar.google.com/citations",
+    icon: "scholar",
+  },
+  {
     label: "LinkedIn",
-    href: "https://www.linkedin.com/in/replace-this",
-    handle: "linkedin.com/in/replace-this",
+    href: "https://www.linkedin.com/in/adithya-chittem-b016481b0/",
+    handle: "adithya-chittem-b016481b0",
+    icon: "linkedin",
   },
   {
     label: "Instagram",
-    href: "https://www.instagram.com/replace-this",
-    handle: "@replace-this",
+    href: "https://www.instagram.com/adithya.chittem/",
+    handle: "@adithya.chittem",
+    icon: "instagram",
   },
   {
     label: "X / Twitter",
-    href: "https://x.com/replace-this",
-    handle: "@replace-this",
+    href: "https://x.com/AdithyaChittem",
+    handle: "@AdithyaChittem",
+    icon: "x",
   },
   {
     label: "Email",
-    href: `mailto:${siteConfig.email}`,
-    handle: siteConfig.email,
+    href: "mailto:chittemadithya@gmail.com",
+    handle: "chittemadithya@gmail.com",
+    icon: "email",
+  },
+  {
+    label: "Yahoo Mail",
+    href: "mailto:adithya_chittem@yahoo.com",
+    handle: "adithya_chittem@yahoo.com",
+    icon: "email",
   },
 ];
 
