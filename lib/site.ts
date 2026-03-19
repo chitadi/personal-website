@@ -55,6 +55,7 @@ export function createPageMetadata(
 export function getAllStaticPaths() {
   return [
     "/",
+    "/education",
     ...workItems.map((item) => `/work/${item.slug}`),
     ...projectItems.map((item) => `/projects/${item.slug}`),
     ...researchItems.map((item) => `/research/${item.slug}`),
@@ -101,7 +102,7 @@ export function buildProfileText() {
   lines.push("");
   lines.push("Projects");
   projectItems.forEach((item) => {
-    lines.push(`${item.title} | ${item.period}`);
+    lines.push(item.title);
     lines.push(item.summary);
     lines.push(`Highlights: ${item.highlights.join(" | ")}`);
   });

@@ -42,10 +42,9 @@ export default async function ProjectDetailPage({
     <DetailPage
       backHref="/#projects"
       backLabel="Back to projects"
-      eyebrow={item.period}
+      eyebrow="Project"
       title={item.title}
       summary={item.summary}
-      meta={[item.period]}
       paragraphs={item.narrative}
       bullets={item.highlights}
       links={item.links}

@@ -9,7 +9,7 @@ type DetailPageProps = {
   eyebrow: string;
   title: string;
   summary: string;
-  meta: string[];
+  meta?: string[];
   paragraphs: string[];
   bullets?: string[];
   links?: EntryLink[];
@@ -33,6 +33,7 @@ export function DetailPage({
 }: DetailPageProps) {
   const hasSidebar = Boolean(links?.length);
   const sidebarLinks = links ?? [];
+  const hasMeta = Boolean(meta?.length);
 
   return (
     <article className="detail-page">
@@ -44,11 +45,13 @@ export function DetailPage({
           <p className="detail-hero__eyebrow">{eyebrow}</p>
           <h1 className="detail-hero__title">{title}</h1>
           <p className="detail-hero__summary">{summary}</p>
-          <div className="detail-hero__meta" aria-label={`${title} details`}>
-            {meta.map((item) => (
-              <span key={item}>{item}</span>
-            ))}
-          </div>
+          {hasMeta ? (
+            <div className="detail-hero__meta" aria-label={`${title} details`}>
+              {meta?.map((item) => (
+                <span key={item}>{item}</span>
+              ))}
+            </div>
+          ) : null}
         </div>
         {image ? (
           <div className="detail-hero__media">

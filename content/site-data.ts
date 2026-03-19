@@ -3,7 +3,8 @@ export type SocialIconName =
   | "linkedin"
   | "instagram"
   | "x"
-  | "email";
+  | "email"
+  | "github";
 
 export type SocialLink = {
   label: string;
@@ -33,7 +34,6 @@ export type WorkItem = {
 export type ProjectItem = {
   slug: string;
   title: string;
-  period: string;
   summary: string;
   stack: string[];
   highlights: string[];
@@ -66,7 +66,7 @@ export type WalkingItem = {
 export const siteConfig = {
   name: "Adithya Chittem",
   fullName: "Adithya Chittem",
-  title: "Chittem's Workspace",
+  title: "Adithya Chittem's Workspace",
   description:
     "A warm, editorial personal website about uni, work, projects and research by yours truly",
   email: "chittemadithya@gmail.com",
@@ -78,47 +78,27 @@ export const hero = {
   intro:
     "I mostly go by my last name, pronounced Chith-um (actually Chit-tem but someone in the 4th grade decided it was wrong and it has stuck ever since). " +
     "I'm currently in my senior year of pursuing a Bachelor's in Computer Science at BITS Pilani and also interning as a Software Engineer at Google India." + 
-    " You can find everything that I do here, from work experience to projects and research. You should also see a little chatbox at the bottom of your screen, yes it's real and capable of" +
-    " answering questions about me (totally not a narc). Feel free to reach out to me on any of my socials at the bottom of the page!"
+    " You can find everything that I do here, from work experience to projects and research. You should also be able to see a little chatbot at the bottom of your screen, yes it's real and capable of" +
+    " answering questions about me (totally not a narc). Feel free to reach out to me on my socials at the bottom of the page!"
 };
 
 export const education = {
   institution: "BITS Pilani",
-  degree: "Degree details to be added",
-  period: "Expected graduation details to be added",
-  summary:
-    "Education snapshot placeholder. Replace with your degree, academic focus, and the through-line between the campus communities you invested in.",
+  degree: "Bachelor's of Engineering in Computer Science",
+  period: "October 2022 - I have a few months left",
+  summary: "Will (somehow) graduate with an 8.81 GPA. I spent a lot of time with the Center for Entrepreneurial Leadership and 180 Degrees Consulting, worked on ML/DL research projects with three different professors, and currently serve as the student representative on the BITS Pilani Senate.",
   highlights: ["180 Degrees Consulting", "CEL", "BOSPO", "Student Senate"],
 };
 
 export const workItems: WorkItem[] = [
   {
-    slug: "cloudflare",
-    company: "Cloudflare",
-    role: "Role details to be added",
-    period: "Timeline to be added",
-    location: "Location to be added",
-    summary:
-      "A placeholder summary for your Cloudflare experience. Replace this with the systems you worked on, the kind of scale involved, and the outcome you are proudest of.",
-    tags: ["Infrastructure", "Scale", "Placeholder"],
-    highlights: [
-      "Explain the problem space in one sharp sentence.",
-      "Call out the most interesting technical constraint.",
-      "Describe the measurable or visible impact.",
-    ],
-    narrative: [
-      "Use this page to explain the scope of the work clearly and without resume shorthand. A recruiter should understand what kind of systems you touched after one skim.",
-      "You can also use this space to highlight how you approached ambiguity, ownership, and collaboration. That usually reads stronger than a raw task list.",
-    ],
-  },
-  {
     slug: "google",
     company: "Google",
-    role: "Role details to be added",
-    period: "Timeline to be added",
-    location: "Location to be added",
+    role: "SWE Intern",
+    period: "Jan 2026 - Present",
+    location: "Bangalore, India",
     summary:
-      "A placeholder summary for your Google experience. Replace it with the product area, the engineering challenge, and the part that best reflects your taste and judgment.",
+      "Currently working in Google Cloud, building agents for the Networks team that automate the processes of triaging, troubleshooting and fixing crucial bugs in Google's network.",
     tags: ["Product", "Systems", "Placeholder"],
     highlights: [
       "Summarize the team or product context.",
@@ -133,11 +113,11 @@ export const workItems: WorkItem[] = [
   {
     slug: "oracle",
     company: "Oracle",
-    role: "Role details to be added",
-    period: "Timeline to be added",
-    location: "Location to be added",
+    role: "SDE Intern",
+    period: "May 2025 - July 2025",
+    location: "Bangalore, India",
     summary:
-      "A placeholder summary for your Oracle experience. Replace this with the domain, your contribution, and the practical engineering depth behind the work.",
+      "Worked in the NoSQL Database team where I built an exhaustive checkpointing mechanism for their database migration tool to bring service downtime to a near zero.",
     tags: ["Enterprise", "Execution", "Placeholder"],
     highlights: [
       "Identify the business or platform context.",
@@ -149,13 +129,31 @@ export const workItems: WorkItem[] = [
       "You can also anchor the page with one detail that makes the experience memorable, not just impressive.",
     ],
   },
+  {
+    slug: "campus-fund",
+    company: "Campus Fund",
+    role: "Investment Analyst",
+    period: "June 2023 - July 2024",
+    location: "Bangalore, India",
+    summary:
+      "An early member of the student investment team. Sourced and evaluated 100+ early stage startups, and led diligence on Campus Fund's biggest deal at the time.",
+    tags: ["Infrastructure", "Scale", "Placeholder"],
+    highlights: [
+      "Explain the problem space in one sharp sentence.",
+      "Call out the most interesting technical constraint.",
+      "Describe the measurable or visible impact.",
+    ],
+    narrative: [
+      "Use this page to explain the scope of the work clearly and without resume shorthand. A recruiter should understand what kind of systems you touched after one skim.",
+      "You can also use this space to highlight how you approached ambiguity, ownership, and collaboration. That usually reads stronger than a raw task list.",
+    ],
+  },
 ];
 
 export const projectItems: ProjectItem[] = [
   {
     slug: "cel-newsletter",
     title: "CEL Newsletter",
-    period: "Campus project",
     summary:
       "A newsletter workflow for campus updates, community stories, and consistent publication. This is a good place to show product judgment in a scrappy setting.",
     stack: ["Editorial workflow", "Automation", "Distribution"],
@@ -168,11 +166,11 @@ export const projectItems: ProjectItem[] = [
       "Explain why the newsletter mattered, who it served, and what felt broken before you built the workflow.",
       "You can use the rest of the page to walk through the system design, the publishing process, and the small choices that made the output more dependable.",
     ],
+    links: [{ label: "GitHub", href: "https://github.com/chitadi/cel-newsletter" }],
   },
   {
     slug: "mcp-server",
     title: "MCP Server",
-    period: "Side project",
     summary:
       "An experiment in tool-using LLM workflows through an MCP server. This is the project to make your taste in interfaces, context design, and agent ergonomics visible.",
     stack: ["LLMs", "Tooling", "Backend"],
@@ -185,11 +183,11 @@ export const projectItems: ProjectItem[] = [
       "Use this page to explain the architecture and the human problem it was meant to solve. The most useful detail is usually why this needed to exist in the first place.",
       "A crisp diagram or linked demo can come later, but the text should already communicate the point of view behind the build.",
     ],
+    links: [{ label: "GitHub", href: "https://github.com/chitadi/news-agent-poke-mcp" }],
   },
   {
     slug: "cnn-from-scratch",
     title: "CNN From Scratch",
-    period: "Learning project",
     summary:
       "A from-first-principles implementation of a convolutional neural network. The strength here is clarity: what you rebuilt, why, and what understanding it gave you.",
     stack: ["Machine learning", "Numerical methods", "Foundations"],
@@ -202,17 +200,35 @@ export const projectItems: ProjectItem[] = [
       "This page works best when it shows the delta between using a framework and understanding the mechanics underneath it.",
       "Focus on the most interesting implementation detail, whether that was convolution logic, backpropagation, debugging gradients, or training behavior.",
     ],
+    links: [{ label: "GitHub", href: "https://github.com/chitadi/cnn_proj_cpu" }],
+  },
+  {
+    slug: "live-interior-designer-agent",
+    title: "Live Interior Designer Agent",
+    summary:
+      "A real-time design assistant for interior planning. This project is a good place to show multimodal UX decisions, tool orchestration, and how the agent stays useful under ambiguity.",
+    stack: ["LLMs", "Computer vision", "Realtime systems"],
+    highlights: [
+      "How the live interaction loop worked end-to-end.",
+      "What constraints shaped the agent's recommendations.",
+      "How you evaluated output quality and usefulness.",
+    ],
+    narrative: [
+      "Use this page to explain the product problem first: what users struggled with before the agent existed and why realtime guidance mattered.",
+      "Then walk through architecture and tradeoffs, especially latency, grounding, and how you balanced creative suggestions with practical constraints.",
+    ],
+    links: [{ label: "GitHub", href: "https://github.com/chitadi/gemini-live-agent-hack" }],
   },
 ];
 
 export const researchItems: ResearchItem[] = [
   {
     slug: "publication-one",
-    title: "Publication One",
-    publication: "Publication details to be added",
-    year: "Year to be added",
+    title: "SAC: A Framework for Measuring and Inducing Personality Traits in LLMs with Intensity Control",
+    publication: "arXiv preprint",
+    year: "2025",
     summary:
-      "Placeholder summary for your first publication. Replace this with the central research question, the method, and the most meaningful result.",
+      "Introduced Specific Attribute Control (SAC), extending MPI from the Big Five to 16PF so LLM personalities can be measured and steered across 16 fine-grained traits with explicit intensity levels. Experiments show continuous intensity control is more reliable than binary toggles and causes coherent shifts in related traits, enabling more nuanced human-machine interactions.",
     keywords: ["Research", "Publication", "Placeholder"],
     highlights: [
       "State the research problem in plain language.",
@@ -223,14 +239,15 @@ export const researchItems: ResearchItem[] = [
       "Use this page for a readable explanation of the paper. Someone outside your exact subfield should still understand what the work was trying to prove or improve.",
       "If you contributed to experiments, analysis, writing, or framing, make that explicit. It helps readers understand how you work, not just what the paper covered.",
     ],
+    links: [{ label: "Read on arXiv", href: "https://arxiv.org/abs/2506.20993" }],
   },
   {
     slug: "publication-two",
-    title: "Publication Two",
-    publication: "Publication details to be added",
-    year: "Year to be added",
+    title: "mmWave Radar Aware Dual-Conditioned GAN for Speech Reconstruction of Signals With Low SNR",
+    publication: "arXiv preprint",
+    year: "2026",
     summary:
-      "Placeholder summary for your second publication. Replace it with the key idea, the context, and why the result matters.",
+      "Built a two-stage RAD-GAN pipeline to reconstruct intelligible full-band speech from noisy, band-limited mmWave captures (-5 dB to -1 dB), with a radar-tailored Multi-Mel Discriminator and Residual Fusion Gate. Even with limited data, no pre-trained modules, and no augmentations, the method outperformed SOTA approaches for this task.",
     keywords: ["Research", "Writing", "Placeholder"],
     highlights: [
       "Name the question the paper tried to answer.",
@@ -241,6 +258,7 @@ export const researchItems: ResearchItem[] = [
       "This detail page is designed for a plain-English summary first and a research summary second. That balance helps both recruiters and technical readers.",
       "When you have the final paper link, abstract, and citation details, they can slot into this page without changing the overall design.",
     ],
+    links: [{ label: "Read on arXiv", href: "https://arxiv.org/abs/2602.22431" }],
   },
 ];
 
@@ -306,6 +324,12 @@ export const socialLinks: SocialLink[] = [
     icon: "linkedin",
   },
   {
+    label: "GitHub",
+    href: "https://github.com/chitadi",
+    handle: "github.com/chitadi",
+    icon: "github",
+  },
+  {
     label: "Google Scholar",
     href: "https://scholar.google.com/citations?hl=en&view_op=list_works&gmla=AF9nlQs5uIPZjmlFs_joHg0PR-XgO29AnImS6pA9le5gh0ZrOBk1b8gR_vQeO77sjdXrGgtr5pqFqkPp8aanmb5iyrwQJVBQDXV7aUPNG5E&user=iLp7izgAAAAJ",
     handle: "scholar.google.com/citations",
@@ -316,12 +340,6 @@ export const socialLinks: SocialLink[] = [
     href: "https://www.instagram.com/adithya.chittem/",
     handle: "@adithya.chittem",
     icon: "instagram",
-  },
-  {
-    label: "Yahoo Mail",
-    href: "mailto:adithya_chittem@yahoo.com",
-    handle: "adithya_chittem@yahoo.com",
-    icon: "email",
   },
 ];
 

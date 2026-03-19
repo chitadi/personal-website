@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import heroPortrait from "@/app/figs/pfp.jpeg";
 import { JsonLd } from "@/components/json-ld";
@@ -71,12 +72,8 @@ export default function HomePage() {
           <div className="section-header">
             <p className="section-header__eyebrow">Work experience</p>
             <h2 id="work-title" className="section-header__title">
-              Internships and roles that shaped how I build.
+              My professional journey so far (try clicking the cards!)
             </h2>
-            <p className="section-header__summary">
-              Each card expands into a detail page so the site stays scannable up
-              front and still supports deeper reading.
-            </p>
           </div>
 
           <div className="card-grid">
@@ -97,56 +94,63 @@ export default function HomePage() {
           <div className="section-header">
             <p className="section-header__eyebrow">Education</p>
             <h2 id="education-title" className="section-header__title">
-              A campus chapter with room for both academics and communities.
+              A solid 6/10 experience, B tier at best
             </h2>
-            <p className="section-header__summary">{education.summary}</p>
           </div>
 
-          <article className="education-card">
+          <Link href="/education" className="education-card education-card--interactive">
             <div>
               <p className="education-card__eyebrow">{education.institution}</p>
               <h3 className="education-card__title">{education.degree}</h3>
               <p className="education-card__period">{education.period}</p>
+              <p className="education-card__summary">{education.summary}</p>
             </div>
-          </article>
+          </Link>
         </section>
 
         <section id="research" className="content-section" aria-labelledby="research-title">
-          <div className="section-header">
+          <div className="section-header section-header--wide">
             <p className="section-header__eyebrow">Research</p>
             <h2 id="research-title" className="section-header__title">
-              Publications presented in a way that is readable, not just formal.
+              I've written some papers over the last year (i think they are very cool)
             </h2>
-            <p className="section-header__summary">
-              This section is designed for both recruiters and technical readers:
-              short summaries on the landing page, fuller context on each paper page.
-            </p>
           </div>
 
           <div className="card-grid card-grid--two">
             {researchItems.map((item) => (
-              <SectionCard
-                key={item.slug}
-                href={`/research/${item.slug}`}
-                eyebrow={item.publication}
-                title={item.title}
-                summary={item.summary}
-                meta={[item.year]}
-              />
+              <article key={item.slug} className="card card--research card--interactive">
+                <div className="card__content card__content--research">
+                  <h3 className="card__title">
+                    <Link href={`/research/${item.slug}`} className="card__title-link">
+                      {item.title}
+                    </Link>
+                  </h3>
+                  <div className="card__research-meta">
+                    {item.links?.[0]?.href ? (
+                      <a
+                        href={item.links[0].href}
+                        className="text-link card__link"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {item.links[0].href.replace(/^https?:\/\//, "")}
+                      </a>
+                    ) : null}
+                    <span className="card__research-year">{item.year}</span>
+                  </div>
+                  <p className="card__summary card__summary--compact">{item.summary}</p>
+                </div>
+              </article>
             ))}
           </div>
         </section>
 
         <section id="projects" className="content-section" aria-labelledby="projects-title">
-          <div className="section-header">
+          <div className="section-header section-header--wide">
             <p className="section-header__eyebrow">Projects</p>
             <h2 id="projects-title" className="section-header__title">
-              Side builds with a mix of curiosity, systems thinking, and taste.
+              "Are you really living if you dont have 10 pending side projects?"
             </h2>
-            <p className="section-header__summary">
-              The summaries live in plain HTML so the work stays crawlable and easy
-              to parse, even before someone clicks deeper.
-            </p>
           </div>
 
           <ProjectsCarousel items={projectItems} />

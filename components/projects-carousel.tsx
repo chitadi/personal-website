@@ -1,10 +1,9 @@
 "use client";
 
+import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 
 import type { ProjectItem } from "@/content/site-data";
-
-import { SectionCard } from "./section-card";
 
 const AUTO_ADVANCE_MS = 2500;
 
@@ -134,13 +133,26 @@ export function ProjectsCarousel({ items }: ProjectsCarouselProps) {
         >
           {renderedSlides.map((project, index) => (
             <div key={`${project.slug}-${index}`} className="projects-carousel__slide">
-              <SectionCard
-                href={`/projects/${project.slug}`}
-                eyebrow={project.period}
-                title={project.title}
-                summary={project.summary}
-                meta={[project.period]}
-              />
+              <article className="card card--interactive">
+                <div className="card__content">
+                  <h3 className="card__title">
+                    <Link href={`/projects/${project.slug}`} className="card__title-link">
+                      {project.title}
+                    </Link>
+                  </h3>
+                  {project.links?.[0]?.href ? (
+                    <a
+                      href={project.links[0].href}
+                      className="text-link card__link"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {project.links[0].href.replace(/^https?:\/\//, "")}
+                    </a>
+                  ) : null}
+                  <p className="card__summary">{project.summary}</p>
+                </div>
+              </article>
             </div>
           ))}
         </div>

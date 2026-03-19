@@ -3,10 +3,10 @@ import Link from "next/link";
 
 type SectionCardProps = {
   href: string;
-  eyebrow: string;
+  eyebrow?: string;
   title: string;
   summary: string;
-  meta: string[];
+  meta?: string[];
   image?: {
     src: string;
     alt: string;
@@ -21,6 +21,9 @@ export function SectionCard({
   meta,
   image,
 }: SectionCardProps) {
+  const hasEyebrow = Boolean(eyebrow);
+  const hasMeta = Boolean(meta?.length);
+
   return (
     <Link href={href} className="card card--interactive">
       {image ? (
@@ -29,12 +32,14 @@ export function SectionCard({
         </div>
       ) : null}
       <div className="card__content">
-        <p className="card__eyebrow">{eyebrow}</p>
-        <div className="card__meta">
-          {meta.map((item) => (
-            <span key={item}>{item}</span>
-          ))}
-        </div>
+        {hasEyebrow ? <p className="card__eyebrow">{eyebrow}</p> : null}
+        {hasMeta ? (
+          <div className="card__meta">
+            {meta?.map((item) => (
+              <span key={item}>{item}</span>
+            ))}
+          </div>
+        ) : null}
         <h3 className="card__title">{title}</h3>
         <p className="card__summary">{summary}</p>
       </div>
