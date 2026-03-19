@@ -40,8 +40,8 @@ export default async function WalkingDetailPage({
 
   return (
     <DetailPage
-      backHref="/#walking"
-      backLabel="Back to walking"
+      backHref="/"
+      backLabel="Back to home"
       eyebrow={item.location}
       title={item.title}
       summary={item.summary}

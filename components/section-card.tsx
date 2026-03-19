@@ -7,7 +7,6 @@ type SectionCardProps = {
   title: string;
   summary: string;
   meta: string[];
-  tags?: string[];
   image?: {
     src: string;
     alt: string;
@@ -20,7 +19,6 @@ export function SectionCard({
   title,
   summary,
   meta,
-  tags,
   image,
 }: SectionCardProps) {
   return (
@@ -39,17 +37,7 @@ export function SectionCard({
         </div>
         <h3 className="card__title">{title}</h3>
         <p className="card__summary">{summary}</p>
-        {tags?.length ? (
-          <div className="card__tags" aria-label={`${title} tags`}>
-            {tags.map((tag) => (
-              <span key={tag} className="card__tag">
-                {tag}
-              </span>
-            ))}
-          </div>
-        ) : null}
       </div>
     </Link>
   );
 }
-

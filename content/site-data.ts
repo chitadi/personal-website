@@ -64,19 +64,22 @@ export type WalkingItem = {
 };
 
 export const siteConfig = {
-  name: "Chittem",
-  fullName: "Chittem",
-  title: "Engineer, researcher, and builder",
+  name: "Adithya Chittem",
+  fullName: "Adithya Chittem",
+  title: "Chittem's Workspace",
   description:
-    "A warm, editorial personal website about work, projects, research, and the long walks that tie it all together.",
+    "A warm, editorial personal website about uni, work, projects and research by yours truly",
   email: "chittemadithya@gmail.com",
 };
 
 export const hero = {
-  eyebrow: "Introduction",
-  title: "Chittem",
+  eyebrow: "",
+  title: "Adithya Chittem",
   intro:
-    "Write your introduction here in your own voice. Keep it honest, direct, and simple. This space should read like you, not like a headline.",
+    "I mostly go by my last name, pronounced Chith-um (actually Chit-tem but someone in the 4th grade decided it was wrong and it has stuck ever since). " +
+    "I'm currently in my senior year of pursuing a Bachelor's in Computer Science at BITS Pilani and also interning as a Software Engineer at Google India." + 
+    " You can find everything that I do here, from work experience to projects and research. You should also see a little chatbox at the bottom of your screen, yes it's real and capable of" +
+    " answering questions about me (totally not a narc). Feel free to reach out to me on any of my socials at the bottom of the page!"
 };
 
 export const education = {
@@ -285,22 +288,10 @@ export const walkingItems: WalkingItem[] = [
 
 export const socialLinks: SocialLink[] = [
   {
-    label: "Google Scholar",
-    href: "https://scholar.google.com/citations?hl=en&view_op=list_works&gmla=AF9nlQs5uIPZjmlFs_joHg0PR-XgO29AnImS6pA9le5gh0ZrOBk1b8gR_vQeO77sjdXrGgtr5pqFqkPp8aanmb5iyrwQJVBQDXV7aUPNG5E&user=iLp7izgAAAAJ",
-    handle: "scholar.google.com/citations",
-    icon: "scholar",
-  },
-  {
-    label: "LinkedIn",
-    href: "https://www.linkedin.com/in/adithya-chittem-b016481b0/",
-    handle: "adithya-chittem-b016481b0",
-    icon: "linkedin",
-  },
-  {
-    label: "Instagram",
-    href: "https://www.instagram.com/adithya.chittem/",
-    handle: "@adithya.chittem",
-    icon: "instagram",
+    label: "Email",
+    href: "mailto:chittemadithya@gmail.com",
+    handle: "chittemadithya@gmail.com",
+    icon: "email",
   },
   {
     label: "X / Twitter",
@@ -309,10 +300,22 @@ export const socialLinks: SocialLink[] = [
     icon: "x",
   },
   {
-    label: "Email",
-    href: "mailto:chittemadithya@gmail.com",
-    handle: "chittemadithya@gmail.com",
-    icon: "email",
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/adithya-chittem-b016481b0/",
+    handle: "adithya-chittem-b016481b0",
+    icon: "linkedin",
+  },
+  {
+    label: "Google Scholar",
+    href: "https://scholar.google.com/citations?hl=en&view_op=list_works&gmla=AF9nlQs5uIPZjmlFs_joHg0PR-XgO29AnImS6pA9le5gh0ZrOBk1b8gR_vQeO77sjdXrGgtr5pqFqkPp8aanmb5iyrwQJVBQDXV7aUPNG5E&user=iLp7izgAAAAJ",
+    handle: "scholar.google.com/citations",
+    icon: "scholar",
+  },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/adithya.chittem/",
+    handle: "@adithya.chittem",
+    icon: "instagram",
   },
   {
     label: "Yahoo Mail",
@@ -333,8 +336,7 @@ export const suggestedPrompts = [
 export const primarySections = [
   { id: "work", label: "Work" },
   { id: "education", label: "Education" },
-  { id: "projects", label: "Projects" },
   { id: "research", label: "Research" },
-  { id: "walking", label: "Walking" },
+  { id: "projects", label: "Projects" },
   { id: "socials", label: "Socials" },
 ];

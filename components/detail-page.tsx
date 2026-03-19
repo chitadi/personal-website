@@ -10,7 +10,6 @@ type DetailPageProps = {
   title: string;
   summary: string;
   meta: string[];
-  tags?: string[];
   paragraphs: string[];
   bullets?: string[];
   links?: EntryLink[];
@@ -27,12 +26,14 @@ export function DetailPage({
   title,
   summary,
   meta,
-  tags,
   paragraphs,
   bullets,
   links,
   image,
 }: DetailPageProps) {
+  const hasSidebar = Boolean(links?.length);
+  const sidebarLinks = links ?? [];
+
   return (
     <article className="detail-page">
       <div className={`detail-hero ${image ? "" : "detail-hero--single"}`}>
@@ -56,26 +57,13 @@ export function DetailPage({
         ) : null}
       </div>
 
-      <div className="detail-layout">
-        <aside className="detail-sidebar">
-          {tags?.length ? (
-            <section className="detail-sidebar__panel">
-              <p className="detail-sidebar__title">Focus</p>
-              <div className="detail-sidebar__tags">
-                {tags.map((tag) => (
-                  <span key={tag} className="detail-sidebar__tag">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </section>
-          ) : null}
-
-          {links?.length ? (
+      <div className={`detail-layout ${hasSidebar ? "" : "detail-layout--single"}`}>
+        {hasSidebar ? (
+          <aside className="detail-sidebar">
             <section className="detail-sidebar__panel">
               <p className="detail-sidebar__title">Links</p>
               <div className="detail-sidebar__links">
-                {links.map((link) => (
+                {sidebarLinks.map((link) => (
                   <a
                     key={link.href}
                     href={link.href}
@@ -88,8 +76,8 @@ export function DetailPage({
                 ))}
               </div>
             </section>
-          ) : null}
-        </aside>
+          </aside>
+        ) : null}
 
         <div className="detail-main">
           <section className="detail-main__panel">

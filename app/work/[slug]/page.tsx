@@ -46,7 +46,6 @@ export default async function WorkDetailPage({
       title={item.company}
       summary={item.summary}
       meta={[item.period, item.location]}
-      tags={item.tags}
       paragraphs={item.narrative}
       bullets={item.highlights}
       links={item.links}

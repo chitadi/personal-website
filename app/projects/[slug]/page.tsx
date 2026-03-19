@@ -45,8 +45,7 @@ export default async function ProjectDetailPage({
       eyebrow={item.period}
       title={item.title}
       summary={item.summary}
-      meta={item.stack}
-      tags={item.stack}
+      meta={[item.period]}
       paragraphs={item.narrative}
       bullets={item.highlights}
       links={item.links}

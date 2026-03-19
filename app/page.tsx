@@ -1,6 +1,8 @@
 import Image from "next/image";
 
+import heroPortrait from "@/app/figs/pfp.jpeg";
 import { JsonLd } from "@/components/json-ld";
+import { ProjectsCarousel } from "@/components/projects-carousel";
 import { SectionCard } from "@/components/section-card";
 import { SocialIcon } from "@/components/social-icon";
 import {
@@ -10,7 +12,6 @@ import {
   researchItems,
   siteConfig,
   socialLinks,
-  walkingItems,
   workItems,
 } from "@/content/site-data";
 import { createPageMetadata, getSiteUrl } from "@/lib/site";
@@ -36,7 +37,6 @@ export default function HomePage() {
       "Research",
       "Product-minded systems",
       "Machine learning",
-      "Walking",
     ],
   };
 
@@ -47,7 +47,7 @@ export default function HomePage() {
       <div className="landing-page">
         <section className="hero" aria-labelledby="hero-title">
           <div className="hero__copy">
-            <p className="hero__eyebrow">{hero.eyebrow}</p>
+            {hero.eyebrow ? <p className="hero__eyebrow">{hero.eyebrow}</p> : null}
             <h1 id="hero-title" className="hero__title">
               {hero.title}
             </h1>
@@ -57,16 +57,12 @@ export default function HomePage() {
           <div className="hero__portrait-card">
             <div className="hero__portrait-frame">
               <Image
-                src="/portrait-placeholder.svg"
-                alt="Portrait placeholder for Chittem"
+                src={heroPortrait}
+                alt="Portrait of Adithya Chittem"
                 fill
                 sizes="(max-width: 900px) 100vw, 40vw"
                 priority
               />
-            </div>
-            <div className="hero__portrait-caption">
-              <strong>Portrait placeholder</strong>
-              <span>Swap this with your final photo when ready.</span>
             </div>
           </div>
         </section>
@@ -92,7 +88,6 @@ export default function HomePage() {
                 title={item.company}
                 summary={item.summary}
                 meta={[item.period, item.location]}
-                tags={item.tags}
               />
             ))}
           </div>
@@ -113,41 +108,7 @@ export default function HomePage() {
               <h3 className="education-card__title">{education.degree}</h3>
               <p className="education-card__period">{education.period}</p>
             </div>
-            <div className="education-card__highlights">
-              {education.highlights.map((item) => (
-                <span key={item} className="pill pill--soft">
-                  {item}
-                </span>
-              ))}
-            </div>
           </article>
-        </section>
-
-        <section id="projects" className="content-section" aria-labelledby="projects-title">
-          <div className="section-header">
-            <p className="section-header__eyebrow">Projects</p>
-            <h2 id="projects-title" className="section-header__title">
-              Side builds with a mix of curiosity, systems thinking, and taste.
-            </h2>
-            <p className="section-header__summary">
-              The summaries live in plain HTML so the work stays crawlable and easy
-              to parse, even before someone clicks deeper.
-            </p>
-          </div>
-
-          <div className="card-grid">
-            {projectItems.map((item) => (
-              <SectionCard
-                key={item.slug}
-                href={`/projects/${item.slug}`}
-                eyebrow={item.period}
-                title={item.title}
-                summary={item.summary}
-                meta={[item.period]}
-                tags={item.stack}
-              />
-            ))}
-          </div>
         </section>
 
         <section id="research" className="content-section" aria-labelledby="research-title">
@@ -171,67 +132,48 @@ export default function HomePage() {
                 title={item.title}
                 summary={item.summary}
                 meta={[item.year]}
-                tags={item.keywords}
               />
             ))}
           </div>
         </section>
 
-        <section id="walking" className="content-section" aria-labelledby="walking-title">
+        <section id="projects" className="content-section" aria-labelledby="projects-title">
           <div className="section-header">
-            <p className="section-header__eyebrow">Walking</p>
-            <h2 id="walking-title" className="section-header__title">
-              A quiet photo-album section for the walks that keep everything else in balance.
+            <p className="section-header__eyebrow">Projects</p>
+            <h2 id="projects-title" className="section-header__title">
+              Side builds with a mix of curiosity, systems thinking, and taste.
             </h2>
             <p className="section-header__summary">
-              This part stays lightweight on purpose. It makes the site feel human
-              without pulling attention away from the work.
+              The summaries live in plain HTML so the work stays crawlable and easy
+              to parse, even before someone clicks deeper.
             </p>
           </div>
 
-          <div className="card-grid">
-            {walkingItems.map((item) => (
-              <SectionCard
-                key={item.slug}
-                href={`/walking/${item.slug}`}
-                eyebrow={item.location}
-                title={item.title}
-                summary={item.summary}
-                meta={[item.season]}
-                image={{ src: item.image, alt: `${item.title} placeholder artwork` }}
-              />
-            ))}
-          </div>
+          <ProjectsCarousel items={projectItems} />
         </section>
 
         <section id="socials" className="content-section" aria-labelledby="socials-title">
           <div className="section-header">
             <p className="section-header__eyebrow">Socials</p>
             <h2 id="socials-title" className="section-header__title">
-              Find me elsewhere.
+              Get in touch with me!
             </h2>
           </div>
 
-          <div className="social-grid">
+          <div className="social-links" aria-label="Social links">
             {socialLinks.map((item) => (
               <a
                 key={item.label}
                 href={item.href}
-                className="social-card"
+                className="social-link"
                 target={item.href.startsWith("mailto:") ? undefined : "_blank"}
                 rel={item.href.startsWith("mailto:") ? undefined : "noreferrer"}
               >
-                <span className="social-card__lead">
-                  <span className="social-card__icon">
-                    <SocialIcon icon={item.icon} />
-                  </span>
-                  <span className="social-card__copy">
-                    <span className="social-card__label">{item.label}</span>
-                    <strong>{item.handle}</strong>
-                  </span>
+                <span className="social-link__icon" aria-hidden="true">
+                  <SocialIcon icon={item.icon} />
                 </span>
-                <span className="social-card__arrow" aria-hidden="true">
-                  ↗
+                <span className="social-link__label">
+                  {item.label}
                 </span>
               </a>
             ))}
