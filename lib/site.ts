@@ -11,6 +11,107 @@ import {
 
 const FALLBACK_SITE_URL = "https://example.com";
 
+type EntryLinkLike = {
+  label: string;
+  href: string;
+};
+
+function isEntryLinkLike(value: unknown): value is EntryLinkLike {
+  if (typeof value !== "object" || value === null) {
+    return false;
+  }
+
+  return (
+    "label" in value &&
+    "href" in value &&
+    typeof value.label === "string" &&
+    typeof value.href === "string"
+  );
+}
+
+function formatFieldName(field: string) {
+  return field
+    .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
+    .replace(/[_-]+/g, " ")
+    .replace(/\b\w/g, (character) => character.toUpperCase());
+}
+
+function formatFieldValues(value: unknown): string[] {
+  if (typeof value === "string") {
+    const normalized = value.trim();
+    return normalized ? [normalized] : [];
+  }
+
+  if (typeof value === "number" || typeof value === "boolean") {
+    return [String(value)];
+  }
+
+  if (Array.isArray(value)) {
+    return value.flatMap((entry) => {
+      if (typeof entry === "string") {
+        const normalized = entry.trim();
+        return normalized ? [normalized] : [];
+      }
+
+      if (typeof entry === "number" || typeof entry === "boolean") {
+        return [String(entry)];
+      }
+
+      if (isEntryLinkLike(entry)) {
+        return [`${entry.label}: ${entry.href}`];
+      }
+
+      if (entry && typeof entry === "object") {
+        return [JSON.stringify(entry)];
+      }
+
+      return [];
+    });
+  }
+
+  if (isEntryLinkLike(value)) {
+    return [`${value.label}: ${value.href}`];
+  }
+
+  if (value && typeof value === "object") {
+    return [JSON.stringify(value)];
+  }
+
+  return [];
+}
+
+function appendDataBlock(
+  lines: string[],
+  heading: string,
+  path: string,
+  data: Record<string, unknown>,
+) {
+  lines.push(heading);
+  lines.push(`Path: ${path}`);
+
+  Object.entries(data).forEach(([field, value]) => {
+    const values = formatFieldValues(value);
+
+    if (!values.length) {
+      return;
+    }
+
+    const label = formatFieldName(field);
+
+    if (values.length === 1) {
+      lines.push(`${label}: ${values[0]}`);
+      return;
+    }
+
+    lines.push(`${label}:`);
+    values.forEach((entry) => {
+      lines.push(`- ${entry}`);
+    });
+  });
+
+  lines.push("");
+}
+
 export function getSiteUrl() {
   const rawUrl =
     process.env.NEXT_PUBLIC_SITE_URL ??
@@ -81,47 +182,63 @@ export function getWalkingItem(slug: string) {
 
 export function buildProfileText() {
   const lines: string[] = [];
+  const siteUrl = getSiteUrl();
 
-  lines.push(`${siteConfig.fullName} — ${siteConfig.title}`);
-  lines.push(siteConfig.description);
+  lines.push("ChittemGPT Website Knowledge Base");
+  lines.push(`Site URL: ${siteUrl.origin}`);
+  lines.push(
+    "Use this context to answer questions about Adithya Chittem and the website content.",
+  );
   lines.push("");
-  lines.push(hero.title);
-  lines.push(hero.intro);
-  lines.push("");
-  lines.push("Education");
-  lines.push(`${education.institution} | ${education.degree}`);
-  lines.push(education.summary);
-  lines.push(`Highlights: ${education.highlights.join(", ")}`);
-  lines.push("");
-  lines.push("Work");
-  workItems.forEach((item) => {
-    lines.push(`${item.company} | ${item.role}`);
-    lines.push(item.summary);
-    lines.push(`Highlights: ${item.highlights.join(" | ")}`);
+
+  lines.push("Available Paths");
+  getAllStaticPaths().forEach((path) => {
+    lines.push(`- ${path}`);
   });
   lines.push("");
-  lines.push("Projects");
-  projectItems.forEach((item) => {
-    lines.push(item.title);
-    lines.push(item.summary);
-    lines.push(`Highlights: ${item.highlights.join(" | ")}`);
-  });
+
+  appendDataBlock(lines, "Site Profile", "/", siteConfig);
+  appendDataBlock(lines, "Hero Section", "/", hero);
+  appendDataBlock(lines, "Education", "/education", education);
+
+  lines.push("Work Cards");
   lines.push("");
-  lines.push("Research");
-  researchItems.forEach((item) => {
-    lines.push(`${item.title} | ${item.publication}`);
-    lines.push(item.summary);
+  workItems.forEach((item, index) => {
+    appendDataBlock(
+      lines,
+      `${index + 1}. ${item.company} (${item.role})`,
+      `/work/${item.slug}`,
+      item,
+    );
   });
+
+  lines.push("Project Cards");
   lines.push("");
-  lines.push("Walking");
-  walkingItems.forEach((item) => {
-    lines.push(`${item.title} | ${item.location}`);
-    lines.push(item.summary);
+  projectItems.forEach((item, index) => {
+    appendDataBlock(lines, `${index + 1}. ${item.title}`, `/projects/${item.slug}`, item);
   });
+
+  lines.push("Research Cards");
   lines.push("");
-  lines.push("Socials");
-  socialLinks.forEach((item) => {
-    lines.push(`${item.label}: ${item.handle}`);
+  researchItems.forEach((item, index) => {
+    appendDataBlock(
+      lines,
+      `${index + 1}. ${item.title}`,
+      `/research/${item.slug}`,
+      item,
+    );
+  });
+
+  lines.push("Walking Cards");
+  lines.push("");
+  walkingItems.forEach((item, index) => {
+    appendDataBlock(lines, `${index + 1}. ${item.title}`, `/walking/${item.slug}`, item);
+  });
+
+  lines.push("Social Links");
+  lines.push("");
+  socialLinks.forEach((item, index) => {
+    appendDataBlock(lines, `${index + 1}. ${item.label}`, "/#socials", item);
   });
 
   return lines.join("\n");

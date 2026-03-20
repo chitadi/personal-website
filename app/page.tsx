@@ -94,7 +94,7 @@ export default function HomePage() {
           <div className="section-header">
             <p className="section-header__eyebrow">Education</p>
             <h2 id="education-title" className="section-header__title">
-              A solid 6/10 experience, B tier at best
+              Can't say I'd do it all over again
             </h2>
           </div>
 

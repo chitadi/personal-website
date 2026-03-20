@@ -5,7 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 
 import type { ProjectItem } from "@/content/site-data";
 
-const AUTO_ADVANCE_MS = 2500;
+const AUTO_ADVANCE_MS = 4000;
 
 type ProjectsCarouselProps = {
   items: ProjectItem[];

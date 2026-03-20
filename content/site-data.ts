@@ -153,9 +153,9 @@ export const workItems: WorkItem[] = [
 export const projectItems: ProjectItem[] = [
   {
     slug: "cel-newsletter",
-    title: "CEL Newsletter",
+    title: "CEL Newsletter Agent",
     summary:
-      "A newsletter workflow for campus updates, community stories, and consistent publication. This is a good place to show product judgment in a scrappy setting.",
+      "An automated newsletter agent that scours over 1000+ articles related to startups, finance and tech on the internet daily, semantically sorts them according to relevance and sends them to subscribers.",
     stack: ["Editorial workflow", "Automation", "Distribution"],
     highlights: [
       "How the content pipeline worked from idea to issue.",
@@ -170,9 +170,9 @@ export const projectItems: ProjectItem[] = [
   },
   {
     slug: "mcp-server",
-    title: "MCP Server",
+    title: "Real time News MCP Server",
     summary:
-      "An experiment in tool-using LLM workflows through an MCP server. This is the project to make your taste in interfaces, context design, and agent ergonomics visible.",
+      "Built a Model Context Protocol (MCP) server to fetch real-time news updates across sports, startups, tech, finance for the interactive voice agent, Poke, built by the Interaction Company of California.",
     stack: ["LLMs", "Tooling", "Backend"],
     highlights: [
       "What tools or resources the server exposed.",
@@ -187,9 +187,9 @@ export const projectItems: ProjectItem[] = [
   },
   {
     slug: "cnn-from-scratch",
-    title: "CNN From Scratch",
+    title: "CNN From Scratch in C++",
     summary:
-      "A from-first-principles implementation of a convolutional neural network. The strength here is clarity: what you rebuilt, why, and what understanding it gave you.",
+      "Implemented a Convolutional Neural Network from scratch in C++ without using any deep learning libraries. Actually wrote the computation for each matrix operation, convolution, and backpropagation step manually.",
     stack: ["Machine learning", "Numerical methods", "Foundations"],
     highlights: [
       "What components you implemented yourself.",
@@ -206,7 +206,7 @@ export const projectItems: ProjectItem[] = [
     slug: "live-interior-designer-agent",
     title: "Live Interior Designer Agent",
     summary:
-      "A real-time design assistant for interior planning. This project is a good place to show multimodal UX decisions, tool orchestration, and how the agent stays useful under ambiguity.",
+      "Built an Agent that works with the user's live camera feed and microphone input to provide real-time interior design suggestions to generate a perfect image of their room with the interior style of their choice.",
     stack: ["LLMs", "Computer vision", "Realtime systems"],
     highlights: [
       "How the live interaction loop worked end-to-end.",
@@ -345,10 +345,11 @@ export const socialLinks: SocialLink[] = [
 
 export const suggestedPrompts = [
   "give me fun facts about chittem",
-  "want to know something about chittem?",
+  "what should I know about chittem?",
   "is this guy employable?",
-  "what kinds of projects has chittem built?",
+  "what kind of projects has chittem built?",
   "tell me about chittem's research",
+  "what tech stack is chittem familiar with?"
 ];
 
 export const primarySections = [
