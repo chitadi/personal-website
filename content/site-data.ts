@@ -79,7 +79,7 @@ export const hero = {
     "I mostly go by my last name, pronounced Chith-um (actually Chit-tem but someone in the 4th grade decided it was wrong and it has stuck ever since). " +
     "I'm currently in my senior year of pursuing a Bachelor's in Computer Science at BITS Pilani and also interning as a Software Engineer at Google India." + 
     " You can find everything that I do here, from work experience to projects and research. You should also be able to see a little chatbot at the bottom of your screen, yes it's real and capable of" +
-    " answering questions about me (totally not a narc). Feel free to reach out to me on my socials at the bottom of the page!"
+    " answering questions about me. Feel free to reach out to me on my socials at the bottom of the page!"
 };
 
 export const education = {
