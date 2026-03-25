@@ -47,7 +47,6 @@ export default async function WorkDetailPage({
       summary={item.summary}
       meta={[item.period, item.location]}
       paragraphs={item.narrative}
-      bullets={item.highlights}
       links={item.links}
     />
   );

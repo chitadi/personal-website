@@ -66,7 +66,6 @@ export default async function ResearchDetailPage({
         summary={item.summary}
         meta={[item.year]}
         paragraphs={item.abstract}
-        bullets={item.highlights}
         links={item.links}
       />
     </>

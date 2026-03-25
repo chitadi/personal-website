@@ -106,8 +106,12 @@ export const workItems: WorkItem[] = [
       "Describe what changed because you did the work.",
     ],
     narrative: [
-      "This detail page is built to carry more nuance than a bullet point. Use it for a concise story about what the team needed, how you responded, and what you learned.",
-      "If there was a tension between speed, correctness, and user experience, that is often the most interesting part to write about.",
+      "As a part of my Practice School-2 in BITS Pilani, I have been interning at Google since January of this year.",
+      "I work in the WANForms team in [Google Global Networking (GGN)](https://research.google/teams/global-networking/), which is a part of Google Cloud. In Google's push to make all their teams' efforts AI-first, I have been tasked to build industry grade agents for WANForms that can work with any developer in GGN to automate workflows of detecting, triaging, troubleshooting and fixing crucial defects and bugs in Google's network. The goal is to empower developers in GGN by fasttracking tedious (and annoying) tasks that can take up weeks at a time and bring that down to mere minutes.",
+      "I'm not going to lie, it was intimidating to find out that I would be leading these efforts because the team has put quite some faith in the little experience I have with tinkering around with AI products.",
+      "Unlike most big corporations that would otherwise have interns work on non-production or non-crucial tools, my team has put enormous trust in me to build tools that will be used by the entire GGN organization and I have been loving every second of it. The learning curve has been steep but the team has been super supportive and I'm really proud of the work I've done so far and excited for what's to come in the next few months!",
+      "I've definitely grown a lot as a dev, and its been fun using some of my indie hacking skills and seeing how they scale at an organisation the size of Google. I think I am getting to witness firsthand how big corporations are embracing AI and how engineers who have worked for decades are learning from the younger folks and vice versa (obviously).",
+      "If anyone is around the [Kyoto Office in Bangalore](https://maps.app.goo.gl/9vBHsGB1ov5s5FEr9) (i know i thought it was funny too) come say hi!"
     ],
   },
   {
@@ -125,8 +129,13 @@ export const workItems: WorkItem[] = [
       "Show how the work became reliable or useful.",
     ],
     narrative: [
-      "This section is a good place to explain the engineering baseline you worked within: team size, codebase maturity, and how you handled existing constraints.",
-      "You can also anchor the page with one detail that makes the experience memorable, not just impressive.",
+      "After a gruelling on-campus Summer Internship season, I finally made it to Oracle. I worked in the NoSQL Database team, which is responsible for Oracle's distributed NoSQL database service that offers low latency and high throughput for mission-critical applications.",
+      "Numerous customers of Oracle used the migration tool of the [NoSQL team](https://www.oracle.com/in/database/nosql/) to migrate their databases which were either a file/object store to Oracle's OnPrem DB or the Oracle Cloud DB. However, the migration tool had a major issue of causing significant downtime for customers during the migration process which was a huge pain point for them.",
+      "Servers could crash, processes could get terminated, outages could happen, in any case, the migration process that could sometimes comprise over 4TB worth of data would have to start all over again, from the top. This wasted time, effort and resources for our customers.",
+      "Our task was to make a sound checkpoint feature for the migration tool that would ensure data was backed up, the last safest state was tracked, and the process could resume from the point of failure, saving clients numerous hours and bringing downtime to a near zero.",
+      "On a more personal note, this was my first proper professional experience and I'm glad, even though our internship was about 3 months long, the team encouraged us to work on production-grade projects that were actually relevant to the organisation. I had barely used git before this, and almost never paid much attention to neatly written code before. I thought OOP was a subject and nothing more and as funny as it may sound now, I learnt how to REALLY write code at Oracle.",
+      "Turns out my degree was a little useful afterall.",
+      "And yes, they were kind enough to call me back for a full-time role and I will be returning to Oracle later this year."
     ],
   },
   {
@@ -144,8 +153,11 @@ export const workItems: WorkItem[] = [
       "Describe the measurable or visible impact.",
     ],
     narrative: [
-      "Use this page to explain the scope of the work clearly and without resume shorthand. A recruiter should understand what kind of systems you touched after one skim.",
-      "You can also use this space to highlight how you approached ambiguity, ownership, and collaboration. That usually reads stronger than a raw task list.",
+      "This was my first experience doing anything professionally really. I was a part of the 3rd cohort of student investment analysts at [Campus Fund](https://yourcampusfund.com/cohort-2023-24/). Worked directly with the core team to source, evaluate and invest in Startups across India.",
+      "In my first and second year, I really wanted to understand what it took to be a good founder and what it takes to build an actual company. I figured working at a VC firm would help me understand how it all really works outside of the bubble I had on campus.",
+      "I was at CF for a year and in that year, I spoke to 100s of young founders from all over India and most importantly led what was CF's biggest deal at the time - [Sarla Aviation](https://www.sarla-aviation.com/).",
+      "Now, I enjoy the perks of being a part of the Campus Fund Mafia and will forever be grateful to Richa and co for giving me this opportunity so early in my undergrad.",
+      "If you are a student founder or a recent grad, feel free to reach out to me, I'd be happy to connect you with the Campus Fund team :)"
     ],
   },
 ];
@@ -225,7 +237,7 @@ export const researchItems: ResearchItem[] = [
   {
     slug: "publication-one",
     title: "SAC: A Framework for Measuring and Inducing Personality Traits in LLMs with Intensity Control",
-    publication: "arXiv preprint",
+    publication: "SCITEPRESS proceedings",
     year: "2025",
     summary:
       "Introduced Specific Attribute Control (SAC), extending MPI from the Big Five to 16PF so LLM personalities can be measured and steered across 16 fine-grained traits with explicit intensity levels. Experiments show continuous intensity control is more reliable than binary toggles and causes coherent shifts in related traits, enabling more nuanced human-machine interactions.",
@@ -239,7 +251,12 @@ export const researchItems: ResearchItem[] = [
       "Use this page for a readable explanation of the paper. Someone outside your exact subfield should still understand what the work was trying to prove or improve.",
       "If you contributed to experiments, analysis, writing, or framing, make that explicit. It helps readers understand how you work, not just what the paper covered.",
     ],
-    links: [{ label: "Read on arXiv", href: "https://arxiv.org/abs/2506.20993" }],
+    links: [
+      {
+        label: "Read official publication",
+        href: "https://www.scitepress.org/Link.aspx?doi=10.5220%2f0014415000004052",
+      },
+    ],
   },
   {
     slug: "publication-two",

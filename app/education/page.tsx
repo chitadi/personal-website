@@ -20,7 +20,6 @@ export default function EducationPage() {
       summary={education.summary}
       meta={[education.period, education.institution]}
       paragraphs={[education.summary]}
-      bullets={education.highlights}
     />
   );
 }

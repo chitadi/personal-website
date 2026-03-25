@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { ReactNode } from "react";
 
 import type { EntryLink } from "@/content/site-data";
 
@@ -11,13 +12,53 @@ type DetailPageProps = {
   summary: string;
   meta?: string[];
   paragraphs: string[];
-  bullets?: string[];
   links?: EntryLink[];
   image?: {
     src: string;
     alt: string;
   };
 };
+
+function renderParagraphWithLinks(paragraph: string): ReactNode {
+  const linkPattern = /\[([^\]]+)\]\(([^)\s]+)\)/g;
+  const parts: ReactNode[] = [];
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+
+  while ((match = linkPattern.exec(paragraph)) !== null) {
+    const [fullMatch, label, href] = match;
+
+    if (match.index > lastIndex) {
+      parts.push(paragraph.slice(lastIndex, match.index));
+    }
+
+    const isExternal = href.startsWith("http://") || href.startsWith("https://");
+
+    parts.push(
+      <a
+        key={`${href}-${match.index}`}
+        href={href}
+        className="detail-main__inline-link"
+        target={isExternal ? "_blank" : undefined}
+        rel={isExternal ? "noreferrer" : undefined}
+      >
+        {label}
+      </a>,
+    );
+
+    lastIndex = match.index + fullMatch.length;
+  }
+
+  if (parts.length === 0) {
+    return paragraph;
+  }
+
+  if (lastIndex < paragraph.length) {
+    parts.push(paragraph.slice(lastIndex));
+  }
+
+  return parts;
+}
 
 export function DetailPage({
   backHref,
@@ -27,7 +68,6 @@ export function DetailPage({
   summary,
   meta,
   paragraphs,
-  bullets,
   links,
   image,
 }: DetailPageProps) {
@@ -40,7 +80,10 @@ export function DetailPage({
       <div className={`detail-hero ${image ? "" : "detail-hero--single"}`}>
         <div className="detail-hero__copy">
           <Link href={backHref} className="detail-hero__back">
-            {backLabel}
+            <span className="detail-hero__back-icon" aria-hidden="true">
+              &larr;
+            </span>
+            <span>{backLabel}</span>
           </Link>
           <p className="detail-hero__eyebrow">{eyebrow}</p>
           <h1 className="detail-hero__title">{title}</h1>
@@ -84,24 +127,12 @@ export function DetailPage({
 
         <div className="detail-main">
           <section className="detail-main__panel">
-            <p className="detail-main__eyebrow">Overview</p>
             <div className="detail-main__prose">
               {paragraphs.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
+                <p key={paragraph}>{renderParagraphWithLinks(paragraph)}</p>
               ))}
             </div>
           </section>
-
-          {bullets?.length ? (
-            <section className="detail-main__panel">
-              <p className="detail-main__eyebrow">Highlights</p>
-              <ul className="detail-main__list">
-                {bullets.map((bullet) => (
-                  <li key={bullet}>{bullet}</li>
-                ))}
-              </ul>
-            </section>
-          ) : null}
         </div>
       </div>
     </article>
