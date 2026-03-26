@@ -46,6 +46,7 @@ export default async function ProjectDetailPage({
       title={item.title}
       summary={item.summary}
       paragraphs={item.narrative}
+      media={item.media}
       links={item.links}
     />
   );

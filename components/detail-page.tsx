@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
-import type { EntryLink } from "@/content/site-data";
+import type { DetailMedia, EntryLink } from "@/content/site-data";
 
 type DetailPageProps = {
   backHref: string;
@@ -13,6 +13,7 @@ type DetailPageProps = {
   meta?: string[];
   paragraphs: string[];
   links?: EntryLink[];
+  media?: DetailMedia[];
   image?: {
     src: string;
     alt: string;
@@ -69,11 +70,13 @@ export function DetailPage({
   meta,
   paragraphs,
   links,
+  media,
   image,
 }: DetailPageProps) {
   const hasSidebar = Boolean(links?.length);
   const sidebarLinks = links ?? [];
   const hasMeta = Boolean(meta?.length);
+  const mediaItems = media ?? [];
 
   return (
     <article className="detail-page">
@@ -132,6 +135,29 @@ export function DetailPage({
                 <p key={paragraph}>{renderParagraphWithLinks(paragraph)}</p>
               ))}
             </div>
+            {mediaItems.map((item, index) => {
+              if (item.type !== "video") {
+                return null;
+              }
+
+              return (
+                <figure key={`${item.src}-${index}`} className="detail-main__media">
+                  <video
+                    className="detail-main__video"
+                    src={item.src}
+                    controls={item.controls ?? true}
+                    muted={item.muted ?? true}
+                    autoPlay={item.autoPlay ?? false}
+                    loop={item.loop ?? false}
+                    playsInline
+                    preload="metadata"
+                  />
+                  {item.caption ? (
+                    <figcaption className="detail-main__media-caption">{item.caption}</figcaption>
+                  ) : null}
+                </figure>
+              );
+            })}
           </section>
         </div>
       </div>

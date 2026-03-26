@@ -18,6 +18,16 @@ export type EntryLink = {
   href: string;
 };
 
+export type DetailMedia = {
+  type: "video";
+  src: string;
+  caption?: string;
+  controls?: boolean;
+  muted?: boolean;
+  autoPlay?: boolean;
+  loop?: boolean;
+};
+
 export type WorkItem = {
   slug: string;
   company: string;
@@ -38,6 +48,7 @@ export type ProjectItem = {
   stack: string[];
   highlights: string[];
   narrative: string[];
+  media?: DetailMedia[];
   links?: EntryLink[];
 };
 
@@ -175,8 +186,20 @@ export const projectItems: ProjectItem[] = [
       "How you measured whether readers cared.",
     ],
     narrative: [
-      "Explain why the newsletter mattered, who it served, and what felt broken before you built the workflow.",
-      "You can use the rest of the page to walk through the system design, the publishing process, and the small choices that made the output more dependable.",
+      "We are a small team at the Center for Entrepreneurial Leadership at BITS Pilani. With all the large scale projects that we take up, we sometimes forget the smaller details, the habit of reading insightful content that ensures we stay up to date with all happenings of the ecosystem.",
+      "A newsletter that compiles the best articles every day would be the most ideal way to consume content without really having to search for it. But since we are a small team, we had no manpower to actually curate and maintain an efficient newsletter pipeline every few days.",
+      "I built an agent that scrapes 1000s of articles and Youtube videos across startups, finance, tech in India and all over the world, semantically arranges the most relevant articles and Youtube videos, summarises each entry so that people with no time can take a glance if they wish, and automatically shoots it out to its subscribers every Tuesday, Thursday and Saturday.",
+      "The newsletter has been up for close to a year now, and everyone at CEL is super happy this exists, and has been a great starting point for all the members to get fresh news articles and go off on their own deep dives on topics they find interesting!",
+      "Here's what the latest newsletter looked like - " 
+    ],
+    media: [
+      {
+        type: "video",
+        src: "/figs/cel-newsletter-demo.mp4",
+        caption: "Newsletter issue walkthrough",
+        controls: true,
+        muted: true,
+      },
     ],
     links: [{ label: "GitHub", href: "https://github.com/chitadi/cel-newsletter" }],
   },
@@ -192,8 +215,11 @@ export const projectItems: ProjectItem[] = [
       "What the experiment taught you about agent workflows.",
     ],
     narrative: [
-      "Use this page to explain the architecture and the human problem it was meant to solve. The most useful detail is usually why this needed to exist in the first place.",
-      "A crisp diagram or linked demo can come later, but the text should already communicate the point of view behind the build.",
+      "As a part of the Hackathon conducted at MIT by the Interaction Company of California, the task was to build an MCP server for their voice agent chatbot - Poke.",
+      "Poke, at the time, had an excellent personality, and was extremely easy to talk to and converse with, capable of processing voice notes and even images. Where it struggled was fetching real-time, fresh data accurately.",
+      "This is where the MCP server came in. I built a scraper that fetches 1000s of articles and Youtube videos across entertainment, sports, tech, startups, finance and basically anything that you would consume in your weekly news cycle on an hourly basis so that the news stayed as fresh as possible. This datastore became the source of truth for the MCP server and moreover Poke itself.",
+      "Poke could then fetch articles and videos every hour and keep me posted on the latest happenings, create a newsletter and send it to my mail, and I could even chat to Poke about the news it just fetched, requesting for further breakdowns or more information. Think of it as a news assistant that you could actually talk to like you would with a friend.",
+      "I demoed all the relavant use cases in this [twitter post](https://x.com/AdithyaChittem/status/1968458583722308040?s=20), go check it out!"
     ],
     links: [{ label: "GitHub", href: "https://github.com/chitadi/news-agent-poke-mcp" }],
   },
