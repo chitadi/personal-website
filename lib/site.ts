@@ -5,7 +5,6 @@ import {
   researchItems,
   siteConfig,
   socialLinks,
-  walkingItems,
   workItems,
 } from "@/content/site-data";
 
@@ -160,7 +159,6 @@ export function getAllStaticPaths() {
     ...workItems.map((item) => `/work/${item.slug}`),
     ...projectItems.map((item) => `/projects/${item.slug}`),
     ...researchItems.map((item) => `/research/${item.slug}`),
-    ...walkingItems.map((item) => `/walking/${item.slug}`),
   ];
 }
 
@@ -174,10 +172,6 @@ export function getProjectItem(slug: string) {
 
 export function getResearchItem(slug: string) {
   return researchItems.find((item) => item.slug === slug);
-}
-
-export function getWalkingItem(slug: string) {
-  return walkingItems.find((item) => item.slug === slug);
 }
 
 export function buildProfileText() {
@@ -227,12 +221,6 @@ export function buildProfileText() {
       `/research/${item.slug}`,
       item,
     );
-  });
-
-  lines.push("Walking Cards");
-  lines.push("");
-  walkingItems.forEach((item, index) => {
-    appendDataBlock(lines, `${index + 1}. ${item.title}`, `/walking/${item.slug}`, item);
   });
 
   lines.push("Social Links");

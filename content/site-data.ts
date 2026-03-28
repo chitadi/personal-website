@@ -71,16 +71,6 @@ export type ResearchItem = {
   links?: EntryLink[];
 };
 
-export type WalkingItem = {
-  slug: string;
-  title: string;
-  location: string;
-  season: string;
-  summary: string;
-  image: string;
-  notes: string[];
-};
-
 export const siteConfig = {
   name: "Adithya Chittem",
   fullName: "Adithya Chittem",
@@ -327,48 +317,6 @@ export const researchItems: ResearchItem[] = [
       "When you have the final paper link, abstract, and citation details, they can slot into this page without changing the overall design.",
     ],
     links: [{ label: "Read on arXiv", href: "https://arxiv.org/abs/2602.22431" }],
-  },
-];
-
-export const walkingItems: WalkingItem[] = [
-  {
-    slug: "campus-loop",
-    title: "Campus Loop",
-    location: "Pilani",
-    season: "Late evening",
-    summary:
-      "A placeholder entry for the kind of walk that resets the day and makes room for new ideas. Replace with a real route, image, and short note.",
-    image: "/walking-campus.svg",
-    notes: [
-      "This section is meant to make the site feel personal without becoming noisy. Short notes and thoughtful images will do more than long explanations here.",
-      "If you want, each walk page can become a tiny visual journal entry with one image, one route, and one sentence worth remembering.",
-    ],
-  },
-  {
-    slug: "monsoon-evening",
-    title: "Monsoon Evening",
-    location: "City streets",
-    season: "Rain",
-    summary:
-      "A softer, weather-shaped walk entry placeholder. It adds texture and shows that the site has a life outside work alone.",
-    image: "/walking-rain.svg",
-    notes: [
-      "This is a good slot for a more atmospheric image and a small reflection rather than a full story.",
-      "Keeping the text sparse here helps the rest of the site stay professional while still feeling genuinely yours.",
-    ],
-  },
-  {
-    slug: "airport-dawn",
-    title: "Airport Dawn",
-    location: "Transit",
-    season: "Early morning",
-    summary:
-      "A travel-adjacent walk placeholder for moments between destinations. Replace with a real memory if that feeling matters to your story.",
-    image: "/walking-dawn.svg",
-    notes: [
-      "Some of the best personal-site moments come from small, specific details like this. They make the whole page feel observed rather than assembled.",
-      "One photo and two strong lines are enough.",
-    ],
   },
 ];
 
