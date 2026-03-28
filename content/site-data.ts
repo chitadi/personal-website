@@ -18,15 +18,22 @@ export type EntryLink = {
   href: string;
 };
 
-export type DetailMedia = {
-  type: "video";
-  src: string;
-  caption?: string;
-  controls?: boolean;
-  muted?: boolean;
-  autoPlay?: boolean;
-  loop?: boolean;
-};
+export type DetailMedia =
+  | {
+      type: "video";
+      src: string;
+      caption?: string;
+      controls?: boolean;
+      muted?: boolean;
+      autoPlay?: boolean;
+      loop?: boolean;
+    }
+  | {
+      type: "youtube";
+      src: string;
+      caption?: string;
+      title?: string;
+    };
 
 export type WorkItem = {
   slug: string;
@@ -221,7 +228,9 @@ export const projectItems: ProjectItem[] = [
       "Poke could then fetch articles and videos every hour and keep me posted on the latest happenings, create a newsletter and send it to my mail, and I could even chat to Poke about the news it just fetched, requesting for further breakdowns or more information. Think of it as a news assistant that you could actually talk to like you would with a friend.",
       "I demoed all the relavant use cases in this [twitter post](https://x.com/AdithyaChittem/status/1968458583722308040?s=20), go check it out!"
     ],
-    links: [{ label: "GitHub", href: "https://github.com/chitadi/news-agent-poke-mcp" }],
+    links: [{ label: "GitHub", href: "https://github.com/chitadi/news-agent-poke-mcp" },
+      { label: "Twitter Post", href: "https://x.com/AdithyaChittem/status/1968458583722308040?s=20" }
+    ],
   },
   {
     slug: "cnn-from-scratch",
@@ -235,8 +244,11 @@ export const projectItems: ProjectItem[] = [
       "What tradeoffs became clearer after building it manually.",
     ],
     narrative: [
-      "This page works best when it shows the delta between using a framework and understanding the mechanics underneath it.",
-      "Focus on the most interesting implementation detail, whether that was convolution logic, backpropagation, debugging gradients, or training behavior.",
+      "As a part of my Machine Learning course at BITS Pilani, we had to implement a CNN from scratch in C++. The catch was that we couldn't use any deep learning libraries or frameworks and had to write the computation for each matrix operation, convolution, and backpropagation step manually.",
+      "Extremely intimidating at first, but it really did shape the way I now understand any ML/DL concept now. When you have to write the code for a convolution operation yourself, you really understand what it does and how it works. When you have to write the backpropagation code yourself, you really understand how gradients flow and how the model learns. It was a lot of work but I'm really glad I did it because it gave me a much deeper understanding of the foundations of machine learning and deep learning.",
+      "Since we werent allowed to use any external libraries whatsoever, we had to do everything ourselves, from optimisations to even the data augmentations. It achieved a ~60% accuracy on the CIFAR-10 dataset which was pretty good considering the constraints of the task and the fact that we had to write everything from scratch.",
+      "To test the methodology's efficacy, we were also asked to compare it against standard logistic regression on the same dataset, which performed poorly with a 39.8% accuracy on the same dataset.",
+      "Easily one of the more challenging courses I took in college, but happy that I did!"
     ],
     links: [{ label: "GitHub", href: "https://github.com/chitadi/cnn_proj_cpu" }],
   },
@@ -252,10 +264,23 @@ export const projectItems: ProjectItem[] = [
       "How you evaluated output quality and usefulness.",
     ],
     narrative: [
-      "Use this page to explain the product problem first: what users struggled with before the agent existed and why realtime guidance mattered.",
-      "Then walk through architecture and tradeoffs, especially latency, grounding, and how you balanced creative suggestions with practical constraints.",
+      "This was a project that my friends and I built for the Gemini Live Agents Hackathon hosted by Google. The task was to leverage Gemini's cutting edge live API, i.e, the ability to process live camera feed and microphone input in real time, to build an agent that could interact with the user in a way that was never possible before.",
+      "We built an interior designer agent that could provide real-time interior design suggestions to users based on their live camera feed and microphone input. The user would simply have to turn on their camera and microphone, and the agent would be able to see their room in real time, understand the current interior design style, and provide suggestions on how to improve it based on the user's preferences.",
+      "Finally, the agent would scrape the web to find matching furniture, decor and aesthetic styles to help the user generate a perfect image of their room with the interior style of their choice.",
+      "We were surprised by how well the agent was able to understand multi-modal input and provide relevant suggestions in real-time, but we were happy that we went one step beyond just using the live-api and also leverage Nano Banana to generate the most accurate image possible.",
+      "We made a video demo that you can watch below.",
+      " "
     ],
-    links: [{ label: "GitHub", href: "https://github.com/chitadi/gemini-live-agent-hack" }],
+    media: [
+      {
+        type: "youtube",
+        src: "https://www.youtube.com/watch?v=rf7WWT3usGQ",
+        title: "Live Interior Designer Agent demo",
+        caption: "Live demo walkthrough",
+      },
+    ],
+    links: [{ label: "GitHub", href: "https://github.com/chitadi/gemini-live-agent-hack" }, 
+      { label: "Demo Video", href: "https://www.youtube.com/watch?v=rf7WWT3usGQ" }],
   },
 ];
 

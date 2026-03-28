@@ -61,6 +61,43 @@ function renderParagraphWithLinks(paragraph: string): ReactNode {
   return parts;
 }
 
+function getYouTubeVideoId(urlString: string): string | null {
+  try {
+    const url = new URL(urlString);
+    const hostname = url.hostname.replace(/^www\./, "");
+
+    if (hostname === "youtu.be") {
+      const [videoId] = url.pathname.split("/").filter(Boolean);
+      return videoId ?? null;
+    }
+
+    if (hostname === "youtube.com" || hostname === "m.youtube.com") {
+      if (url.pathname === "/watch") {
+        return url.searchParams.get("v");
+      }
+
+      const [section, videoId] = url.pathname.split("/").filter(Boolean);
+      if ((section === "embed" || section === "shorts" || section === "live") && videoId) {
+        return videoId;
+      }
+    }
+  } catch {
+    return null;
+  }
+
+  return null;
+}
+
+function getYouTubeEmbedUrl(src: string): string {
+  const videoId = getYouTubeVideoId(src);
+
+  if (!videoId) {
+    return src;
+  }
+
+  return `https://www.youtube.com/embed/${videoId}?rel=0`;
+}
+
 export function DetailPage({
   backHref,
   backLabel,
@@ -136,27 +173,48 @@ export function DetailPage({
               ))}
             </div>
             {mediaItems.map((item, index) => {
-              if (item.type !== "video") {
-                return null;
+              if (item.type === "video") {
+                return (
+                  <figure key={`${item.src}-${index}`} className="detail-main__media">
+                    <video
+                      className="detail-main__video"
+                      src={item.src}
+                      controls={item.controls ?? true}
+                      muted={item.muted ?? true}
+                      autoPlay={item.autoPlay ?? false}
+                      loop={item.loop ?? false}
+                      playsInline
+                      preload="metadata"
+                    />
+                    {item.caption ? (
+                      <figcaption className="detail-main__media-caption">{item.caption}</figcaption>
+                    ) : null}
+                  </figure>
+                );
               }
 
-              return (
-                <figure key={`${item.src}-${index}`} className="detail-main__media">
-                  <video
-                    className="detail-main__video"
-                    src={item.src}
-                    controls={item.controls ?? true}
-                    muted={item.muted ?? true}
-                    autoPlay={item.autoPlay ?? false}
-                    loop={item.loop ?? false}
-                    playsInline
-                    preload="metadata"
-                  />
-                  {item.caption ? (
-                    <figcaption className="detail-main__media-caption">{item.caption}</figcaption>
-                  ) : null}
-                </figure>
-              );
+              if (item.type === "youtube") {
+                const embedUrl = getYouTubeEmbedUrl(item.src);
+
+                return (
+                  <figure key={`${item.src}-${index}`} className="detail-main__media">
+                    <iframe
+                      className="detail-main__video detail-main__youtube"
+                      src={embedUrl}
+                      title={item.title ?? item.caption ?? "YouTube video"}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      referrerPolicy="strict-origin-when-cross-origin"
+                      loading="lazy"
+                      allowFullScreen
+                    />
+                    {item.caption ? (
+                      <figcaption className="detail-main__media-caption">{item.caption}</figcaption>
+                    ) : null}
+                  </figure>
+                );
+              }
+
+              return null;
             })}
           </section>
         </div>

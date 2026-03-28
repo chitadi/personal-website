@@ -814,6 +814,11 @@ textarea {
   background: rgba(255, 252, 247, 0.88);
 }
 
+.detail-main__youtube {
+  display: block;
+  aspect-ratio: 16 / 9;
+}
+
 .detail-main__media-caption {
   margin: 0;
   color: var(--muted);
