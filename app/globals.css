@@ -814,6 +814,20 @@ textarea {
   background: rgba(255, 252, 247, 0.88);
 }
 
+.detail-main__image-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  overflow: hidden;
+  background: rgba(255, 252, 247, 0.88);
+}
+
+.detail-main__image {
+  object-fit: cover;
+}
+
 .detail-main__youtube {
   display: block;
   aspect-ratio: 16 / 9;

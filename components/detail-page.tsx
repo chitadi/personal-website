@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
-import type { DetailMedia, EntryLink } from "@/content/site-data";
+import type { DetailMedia, DetailParagraph, EntryLink } from "@/content/site-data";
 
 type DetailPageProps = {
   backHref: string;
@@ -11,7 +11,7 @@ type DetailPageProps = {
   title: string;
   summary: string;
   meta?: string[];
-  paragraphs: string[];
+  paragraphs: DetailParagraph[];
   links?: EntryLink[];
   media?: DetailMedia[];
   image?: {
@@ -168,9 +168,37 @@ export function DetailPage({
         <div className="detail-main">
           <section className="detail-main__panel">
             <div className="detail-main__prose">
-              {paragraphs.map((paragraph) => (
-                <p key={paragraph}>{renderParagraphWithLinks(paragraph)}</p>
-              ))}
+              {paragraphs.map((paragraph, index) => {
+                if (typeof paragraph === "string") {
+                  return <p key={`paragraph-${index}`}>{renderParagraphWithLinks(paragraph)}</p>;
+                }
+
+                return (
+                  <figure key={`${paragraph.src}-${index}`} className="detail-main__media">
+                    <div
+                      className="detail-main__image-wrap"
+                      style={
+                        paragraph.aspectRatio
+                          ? { aspectRatio: paragraph.aspectRatio }
+                          : undefined
+                      }
+                    >
+                      <Image
+                        src={paragraph.src}
+                        alt={paragraph.alt}
+                        fill
+                        sizes="(max-width: 900px) 100vw, 60vw"
+                        className="detail-main__image"
+                      />
+                    </div>
+                    {paragraph.caption ? (
+                      <figcaption className="detail-main__media-caption">
+                        {paragraph.caption}
+                      </figcaption>
+                    ) : null}
+                  </figure>
+                );
+              })}
             </div>
             {mediaItems.map((item, index) => {
               if (item.type === "video") {

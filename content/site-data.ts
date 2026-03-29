@@ -35,6 +35,16 @@ export type DetailMedia =
       title?: string;
     };
 
+export type DetailParagraph =
+  | string
+  | {
+      type: "image";
+      src: string;
+      alt: string;
+      caption?: string;
+      aspectRatio?: string;
+    };
+
 export type WorkItem = {
   slug: string;
   company: string;
@@ -44,7 +54,7 @@ export type WorkItem = {
   summary: string;
   tags: string[];
   highlights: string[];
-  narrative: string[];
+  narrative: DetailParagraph[];
   links?: EntryLink[];
 };
 
@@ -54,7 +64,7 @@ export type ProjectItem = {
   summary: string;
   stack: string[];
   highlights: string[];
-  narrative: string[];
+  narrative: DetailParagraph[];
   media?: DetailMedia[];
   links?: EntryLink[];
 };
@@ -67,7 +77,7 @@ export type ResearchItem = {
   summary: string;
   keywords: string[];
   highlights: string[];
-  abstract: string[];
+  abstract: DetailParagraph[];
   links?: EntryLink[];
 };
 
@@ -289,8 +299,19 @@ export const researchItems: ResearchItem[] = [
       "Surface the most compelling result or takeaway.",
     ],
     abstract: [
-      "Use this page for a readable explanation of the paper. Someone outside your exact subfield should still understand what the work was trying to prove or improve.",
-      "If you contributed to experiments, analysis, writing, or framing, make that explicit. It helps readers understand how you work, not just what the paper covered.",
+      "When you interact with ChatGPT, Claude or Gemini on a daily basis, you have a vague understanding of whether or not they are cooperative, kind, or even stubborn at times. However these perceptions are all subjective. Our research works towards evaluating these personality factors in an objective form. We then go one step beyond to introduce a framework that can steer these personality traits in a way that is more nuanced than just saying 'be more cooperative' or 'be more stubborn'. We introduce the concept of intensity control, which allows us to specify not just the direction of change but also the degree of change in these personality traits. This opens up new possibilities for creating AI agents that can adapt their personalities in a more human-like and contextually appropriate manner.",
+      "The use cases of this work are incredibly exciting, imagine a mental health agent that continuously modifies its personality on the basis of the interactions it has with its patient. On a certain day when the patient is feeling low, the warmth level of the agent goes up and on a certain day if the patient is seeking advice, the assertiveness level goes up.",
+      "Imagine a multi-agent framework where you have different agents with different personalities and you can control the intensity of their traits to create a more dynamic and engaging interaction. For example, in a customer service scenario, you could have an agent that is more empathetic and cooperative for handling sensitive issues, and another agent that is more assertive and direct for handling straightforward inquiries.",
+      {
+        type: "image",
+        src: "/figs/sac.jpeg",
+        alt: "SAC research poster presentation at ICAART 2026",
+        caption: "SAC poster presentation at ICAART 2026",
+      },
+      "Overall, our work on SAC and intensity control provides a new way to think about and design AI personalities, moving beyond static traits to a more fluid and adaptable model that can better meet the needs of users in a wide range of contexts.",
+      "We started this work as a course project in our second year, professors took notice of the value that this work could have and encouraged us to pursue this further. In a year, we managed to conduct full fledged experiments and had results that had direct applications to real world scenarios.",
+      "Our work got accepted at the 18th edition of the [International Conference on Agents and Artificial Intelligence (ICAART 2026)](https://www.scitepress.org/Events/ICAART/ICAART26/ConferencePapers.aspx) and we went to Marbella, Spain in March to present our work in front of some of the leading researchers in Artificial Intelligence.",
+      "In a sequence of events that kept getting more surreal - we met some of the best researchers from all over the world (who were all so welcoming to two complete noobs), had an incredible audience at our poster booth and we flew back to see that our paper has also been cited now :)"
     ],
     links: [
       {
@@ -313,10 +334,15 @@ export const researchItems: ResearchItem[] = [
       "Describe the part you are proud to have owned.",
     ],
     abstract: [
-      "This detail page is designed for a plain-English summary first and a research summary second. That balance helps both recruiters and technical readers.",
-      "When you have the final paper link, abstract, and citation details, they can slot into this page without changing the overall design.",
+      "Regular microphones capture audio waves through the air, radar sensors on the other hand capture the surface vibrations to capture millimeter waves. These waves are then processed to produce intelligible speech. Now, the issue with radar capture is that the environments are generally extremely noisy, making audio reconstruction a near impossible task, especially in scenarios with low SNR (Signal to Noise Ratio). Our work tries to solve this problem by introducing a novel two-stage Radar Aware Dual Path-Generative Adversarial Network (RAD-GAN) pipeline that is specifically designed to handle the unique challenges of mmWave radar captures",
+      "What makes our work stand out is that we designed a radar-tailored Multi-Mel Discriminator and a Residual Fusion Gate to effectively reconstruct intelligible full-band speech from noisy, band-limited mmWave captures with SNRs as low as -5 dB. Even with limited data, no pre-trained modules, and no augmentations, our method outperformed state-of-the-art approaches for this task.",
+      "This research has significant implications for the development of more robust and effective speech reconstruction techniques in noisy environments, which could have applications in various fields such as telecommunications, assistive technologies, and surveillance.",
+      "The work is currently under review for publication in Interspeech 2026, and we have also made a preprint available on arXiv for the community to access and build upon. We have also built a demo website with the output spectrograms, comparison with baselines and even audio outputs so that you cant ake a look at what the output from the models we built sound like! Check it out here - https://rad-gan-demo-site.vercel.app/.",
+      "This work was done by myself and two of my wingies - Deepan Roy and Jash Karani, along with the kind support of Prof. Sandeep Joshi. Looking back, this work is by far and easily the coolest thing I've managed to do over the course of my 4 years of undergrad.",
+      "Deepan and I had a little bit of experience dabbling around with DL frameworks but we had never built anything even remotely from scratch ourselves. Jash is an Electronics and Comms. Engineer that focussed on the Digital Signal Processing aspect of the work. I never thought I'd get to collaborate with someone from a completely different field than mine, that too on a project that is so technically dense.",
+      "We have a few more ideas on where to take this work, but for now we hope we can make it to Australia for Interspeech 2026!"
     ],
-    links: [{ label: "Read on arXiv", href: "https://arxiv.org/abs/2602.22431" }],
+    links: [{ label: "Read on arXiv", href: "https://arxiv.org/abs/2602.22431" }, {label: "Demo Website", href:"https://rad-gan-demo-site.vercel.app/"}],
   },
 ];
 
