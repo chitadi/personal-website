@@ -528,6 +528,44 @@ textarea {
   transition: color 180ms ease;
 }
 
+.card__title--logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 84px;
+}
+
+.card__title-logo-shell {
+  position: relative;
+  display: block;
+  width: min(280px, 100%);
+  height: 56px;
+}
+
+.card__title-logo-image {
+  object-fit: contain;
+  object-position: center;
+}
+
+.card__title-logo--google {
+  width: min(320px, 100%);
+  height: 82px;
+}
+
+.card__title-logo--campus-fund {
+  width: min(320px, 90%);
+  height: 92px;
+  overflow: hidden;
+}
+
+.card__title-logo--campus-fund .card__title-logo-image {
+  object-fit: cover;
+  transform: scale(1.16);
+  transform-origin: center;
+  mix-blend-mode: multiply;
+}
+
 .card__title-link {
   color: inherit;
   text-decoration: none;
@@ -583,6 +621,25 @@ textarea {
   gap: 28px;
   padding: 28px 30px;
   border-radius: var(--radius-lg);
+}
+
+.education-card__institution {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.education-card__institution-logo {
+  width: auto;
+  height: 34px;
+  max-width: 160px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.education-card__institution .education-card__eyebrow {
+  margin: 0;
 }
 
 .education-card--interactive {

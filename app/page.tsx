@@ -1,6 +1,10 @@
-import Image from "next/image";
+import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
 
+import bitsLogo from "@/app/figs/BITS_university_logo.gif";
+import campusFundLogo from "@/app/figs/cf_logo.png";
+import googleLogo from "@/app/figs/Google-logo.png";
+import oracleLogo from "@/app/figs/Oracle_logo.svg.png";
 import heroPortrait from "@/app/figs/pfp.jpeg";
 import { JsonLd } from "@/components/json-ld";
 import { ProjectsCarousel } from "@/components/projects-carousel";
@@ -24,6 +28,26 @@ export const metadata = createPageMetadata(
   siteConfig.description,
   "/",
 );
+
+const workLogoBySlug: Record<
+  string,
+  { src: StaticImageData; alt: string; className?: string }
+> = {
+  google: {
+    src: googleLogo,
+    alt: "Google",
+    className: "card__title-logo--google",
+  },
+  oracle: {
+    src: oracleLogo,
+    alt: "Oracle",
+  },
+  "campus-fund": {
+    src: campusFundLogo,
+    alt: "Campus Fund",
+    className: "card__title-logo--campus-fund",
+  },
+};
 
 export default function HomePage() {
   const personSchema = {
@@ -83,6 +107,7 @@ export default function HomePage() {
                 href={`/work/${item.slug}`}
                 eyebrow={item.role}
                 title={item.company}
+                titleLogo={workLogoBySlug[item.slug]}
                 summary={item.summary}
                 meta={[item.period, item.location]}
               />
@@ -100,7 +125,14 @@ export default function HomePage() {
 
           <Link href="/education" className="education-card education-card--interactive">
             <div>
-              <p className="education-card__eyebrow">{education.institution}</p>
+              <div className="education-card__institution">
+                <Image
+                  src={bitsLogo}
+                  alt="BITS Pilani"
+                  className="education-card__institution-logo"
+                />
+                <p className="education-card__eyebrow">{education.institution}</p>
+              </div>
               <h3 className="education-card__title">{education.degree}</h3>
               <p className="education-card__period">{education.period}</p>
               <p className="education-card__summary">{education.summary}</p>
