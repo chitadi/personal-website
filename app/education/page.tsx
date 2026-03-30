@@ -19,7 +19,8 @@ export default function EducationPage() {
       title={education.degree}
       summary={education.summary}
       meta={[education.period, education.institution]}
-      paragraphs={[education.summary]}
+      paragraphs={education.narrative}
+      sections={education.sections}
     />
   );
 }

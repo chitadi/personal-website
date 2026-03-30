@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
-import type { DetailMedia, DetailParagraph, EntryLink } from "@/content/site-data";
+import type { DetailMedia, DetailParagraph, DetailSection, EntryLink } from "@/content/site-data";
 
 type DetailPageProps = {
   backHref: string;
@@ -12,6 +12,7 @@ type DetailPageProps = {
   summary: string;
   meta?: string[];
   paragraphs: DetailParagraph[];
+  sections?: DetailSection[];
   links?: EntryLink[];
   media?: DetailMedia[];
   image?: {
@@ -98,6 +99,32 @@ function getYouTubeEmbedUrl(src: string): string {
   return `https://www.youtube.com/embed/${videoId}?rel=0`;
 }
 
+function renderDetailParagraph(paragraph: DetailParagraph, key: string): ReactNode {
+  if (typeof paragraph === "string") {
+    return <p key={key}>{renderParagraphWithLinks(paragraph)}</p>;
+  }
+
+  return (
+    <figure key={key} className="detail-main__media">
+      <div
+        className="detail-main__image-wrap"
+        style={paragraph.aspectRatio ? { aspectRatio: paragraph.aspectRatio } : undefined}
+      >
+        <Image
+          src={paragraph.src}
+          alt={paragraph.alt}
+          fill
+          sizes="(max-width: 900px) 100vw, 60vw"
+          className="detail-main__image"
+        />
+      </div>
+      {paragraph.caption ? (
+        <figcaption className="detail-main__media-caption">{paragraph.caption}</figcaption>
+      ) : null}
+    </figure>
+  );
+}
+
 export function DetailPage({
   backHref,
   backLabel,
@@ -106,6 +133,7 @@ export function DetailPage({
   summary,
   meta,
   paragraphs,
+  sections,
   links,
   media,
   image,
@@ -114,6 +142,7 @@ export function DetailPage({
   const sidebarLinks = links ?? [];
   const hasMeta = Boolean(meta?.length);
   const mediaItems = media ?? [];
+  const sectionItems = sections ?? [];
 
   return (
     <article className="detail-page">
@@ -167,39 +196,40 @@ export function DetailPage({
 
         <div className="detail-main">
           <section className="detail-main__panel">
-            <div className="detail-main__prose">
-              {paragraphs.map((paragraph, index) => {
-                if (typeof paragraph === "string") {
-                  return <p key={`paragraph-${index}`}>{renderParagraphWithLinks(paragraph)}</p>;
-                }
+            {paragraphs.length ? (
+              <div className="detail-main__prose">
+                {paragraphs.map((paragraph, index) =>
+                  renderDetailParagraph(paragraph, `paragraph-${index}`),
+                )}
+              </div>
+            ) : null}
+            {sectionItems.length ? (
+              <div className="detail-main__sections">
+                {sectionItems.map((section, sectionIndex) => {
+                  const sectionHeadingId = `detail-section-${sectionIndex}`;
 
-                return (
-                  <figure key={`${paragraph.src}-${index}`} className="detail-main__media">
-                    <div
-                      className="detail-main__image-wrap"
-                      style={
-                        paragraph.aspectRatio
-                          ? { aspectRatio: paragraph.aspectRatio }
-                          : undefined
-                      }
+                  return (
+                    <section
+                      key={`${section.title}-${sectionIndex}`}
+                      className="detail-main__section"
+                      aria-labelledby={sectionHeadingId}
                     >
-                      <Image
-                        src={paragraph.src}
-                        alt={paragraph.alt}
-                        fill
-                        sizes="(max-width: 900px) 100vw, 60vw"
-                        className="detail-main__image"
-                      />
-                    </div>
-                    {paragraph.caption ? (
-                      <figcaption className="detail-main__media-caption">
-                        {paragraph.caption}
-                      </figcaption>
-                    ) : null}
-                  </figure>
-                );
-              })}
-            </div>
+                      <h2 id={sectionHeadingId} className="detail-main__section-title">
+                        {section.title}
+                      </h2>
+                      <div className="detail-main__prose detail-main__section-prose">
+                        {section.paragraphs.map((paragraph, paragraphIndex) =>
+                          renderDetailParagraph(
+                            paragraph,
+                            `section-${sectionIndex}-paragraph-${paragraphIndex}`,
+                          ),
+                        )}
+                      </div>
+                    </section>
+                  );
+                })}
+              </div>
+            ) : null}
             {mediaItems.map((item, index) => {
               if (item.type === "video") {
                 return (

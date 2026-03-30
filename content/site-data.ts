@@ -45,6 +45,21 @@ export type DetailParagraph =
       aspectRatio?: string;
     };
 
+export type DetailSection = {
+  title: string;
+  paragraphs: DetailParagraph[];
+};
+
+export type EducationProfile = {
+  institution: string;
+  degree: string;
+  period: string;
+  summary: string;
+  highlights: string[];
+  narrative: DetailParagraph[];
+  sections: DetailSection[];
+};
+
 export type WorkItem = {
   slug: string;
   company: string;
@@ -100,12 +115,74 @@ export const hero = {
     " answering questions about me. Feel free to reach out to me on my socials at the bottom of the page!"
 };
 
-export const education = {
+export const education: EducationProfile = {
   institution: "BITS Pilani",
   degree: "Bachelor's of Engineering in Computer Science",
   period: "October 2022 - I have a few months left",
   summary: "Will (somehow) graduate with an 8.81 GPA. I spent a lot of time with the Center for Entrepreneurial Leadership and 180 Degrees Consulting, worked on ML/DL research projects with three different professors, and currently serve as the student representative on the BITS Pilani Senate.",
-  highlights: ["180 Degrees Consulting", "CEL", "BOSPO", "Student Senate"],
+  highlights: [
+    "Student Senator",
+    "Center for Entrepreneurial Leadership (CEL)",
+    "180 Degrees Consulting (180DC)",
+    "Conquest",
+    "BOSM Sponz",
+    "Peer Mentorship Program (PMP)",
+    "Teaching Assistant (DSA)",
+    "Student Faculty Council (CSIS)",
+  ],
+  narrative: [
+    "I picked up anything that made me curious really. I can gladly say I tried 'everything' that BITS had to offer, from consulting, entrpreneurship, student government, mentorship, and research.",
+  ],
+  sections: [
+    {
+      title: "Student Senator",
+      paragraphs: [
+        "Use this subsection to document your tenure as Student Senator: what you represented, the discussions you led, and the concrete student outcomes that followed.",
+      ],
+    },
+    {
+      title: "Center for Entrepreneurial Leadership (CEL)",
+      paragraphs: [
+        "Add your CEL journey here: initiatives you drove, events or programs you helped run, and how you supported founders or the startup community on campus.",
+      ],
+    },
+    {
+      title: "180 Degrees Consulting (180DC)",
+      paragraphs: [
+        "Capture your consulting work here, including project scope, client context, problem-solving approach, and the impact of your recommendations.",
+      ],
+    },
+    {
+      title: "Conquest, BITS Pilani",
+      paragraphs: [
+        "Use this space for your Conquest experience: responsibilities, operator workflows, founder interactions, and standout moments from the event cycle.",
+      ],
+    },
+    {
+      title: "Teaching Assistant (DSA)",
+      paragraphs: [
+        "I worked as a TA for the DSA online course that BITS Pilani undertakes in collaboration with HCLTech. These courses are prepared for underprivileged students looking to build a career in software development. As a TA, a large chunk of my work revolved around preparing course content, tests, quizzes and assignments. It was great knowing that my efforts were going towards helping underprivileged students get access to quality education and resources that they otherwise wouldnt have access to.",
+      ],
+    },
+    {
+      title: "Student Faculty Council (CSIS)",
+      paragraphs: [
+        "The Student Faculty Council is the first point of contact between the Computer Science department and the students. I'd grown frustrated with the way the department functioned and really wanted to be the change I wanted to see. As a part of the SFC, we took students' considerations into account and met with important faculty members of the CSIS department to ensure queries and concerns were addressed successfully. This experience also helped me when I decided to run for the position of Student Senator in my third year as well.",
+      ],
+    },
+    {
+      title: "Department of Sponsorship and Marketing (BOSM)",
+      paragraphs: [
+        "The department is responsible for managing sponsorships and marketing initiatives for BITS Open Sports Meet (BOSM), BITS Pilani's premier sports fest, raising tens of lakhs each year to ensure that the fest is sustainable. I look back at my time in BOSPO (how we call it) with quite some nostalgia, I made some great friends in my own batch and met some great seniors and juniors who made my life on campus a lot more memorable.",
+      ],
+    },
+    {
+      title: "Peer Mentorship Program (PMP)",
+      paragraphs: [
+        "The PMP is a mentorship program for freshers at BITS Pilani. Seniors generally get paired up with a fresher in the same stream as them and provide them guidance and support throughout their journeys. It's always nice knowing that a senior has your back when things arent going your way. I'm actually still good friends with my PMP mentor (who also helped me bag my internship) and I thought it only made sense to ensure juniors got the same support from me. Now that college is almost over, I can say that I've helped a fair few juniors figure out what courses to pick, how to study and just help them understand what pitfalls to avoid.",
+      ],
+    },
+  ],
 };
 
 export const workItems: WorkItem[] = [
