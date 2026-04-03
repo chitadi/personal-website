@@ -35,7 +35,6 @@ body {
   color: var(--ink);
   font-family: var(--font-body);
   text-rendering: optimizeLegibility;
-  overflow-x: clip;
 }
 
 body::before {
@@ -142,7 +141,6 @@ textarea {
   border-radius: var(--radius-sm);
   color: var(--muted);
   font-size: 0.94rem;
-  white-space: nowrap;
   transition:
     background-color 180ms ease,
     color 180ms ease,
@@ -316,7 +314,6 @@ textarea {
 .hero__portrait-frame {
   flex: 1;
   min-height: 0;
-  aspect-ratio: 4 / 5;
   border: 0.5px solid var(--line);
   background: rgba(255, 252, 247, 0.78);
 }
@@ -397,7 +394,6 @@ textarea {
   background: rgba(255, 252, 247, 0.88);
   color: var(--ink);
   cursor: pointer;
-  min-height: 44px;
   padding: 10px 16px;
   transition:
     transform 180ms ease,
@@ -438,8 +434,6 @@ textarea {
 .projects-carousel__dots {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
-  justify-content: center;
   gap: 8px;
 }
 
@@ -602,7 +596,6 @@ textarea {
 
 .card__link {
   font-size: 0.9rem;
-  overflow-wrap: anywhere;
 }
 
 .card__research-year {
@@ -853,7 +846,6 @@ textarea {
   text-decoration: underline;
   text-decoration-color: rgba(103, 71, 51, 0.32);
   text-underline-offset: 0.2em;
-  overflow-wrap: anywhere;
 }
 
 .detail-main {
@@ -1112,12 +1104,8 @@ textarea {
 }
 
 @media (max-width: 760px) {
-  html {
-    scroll-padding-top: 136px;
-  }
-
   .site-main {
-    padding: 14px 0 284px;
+    padding: 18px 0 300px;
   }
 
   .site-header {
@@ -1127,8 +1115,6 @@ textarea {
   .site-header__inner {
     flex-direction: column;
     align-items: flex-start;
-    gap: 14px;
-    padding: 12px;
   }
 
   .site-header__nav {
@@ -1136,33 +1122,11 @@ textarea {
     justify-content: flex-start;
     overflow-x: auto;
     flex-wrap: nowrap;
-    gap: 6px;
-    padding: 0 2px 4px 0;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    scroll-snap-type: x proximity;
-  }
-
-  .site-header__nav::-webkit-scrollbar {
-    display: none;
-  }
-
-  .site-header__link {
-    padding: 9px 12px;
-    scroll-snap-align: start;
+    padding-bottom: 4px;
   }
 
   .landing-page {
-    gap: 44px;
-    padding-top: 24px;
-  }
-
-  .content-section {
-    gap: 20px;
-  }
-
-  .section-header__title {
-    font-size: clamp(1.3rem, 7vw, 1.7rem);
+    gap: 56px;
   }
 
   .hero__copy,
@@ -1172,27 +1136,11 @@ textarea {
   .detail-sidebar__panel,
   .detail-main__panel,
   .not-found {
-    padding: 20px;
-    border-radius: 24px;
-  }
-
-  .hero {
-    gap: 18px;
-  }
-
-  .hero__intro {
-    line-height: 1.65;
+    padding: 24px;
   }
 
   .hero__portrait-frame {
-    min-height: 240px;
-    aspect-ratio: 3 / 4;
-  }
-
-  .hero__portrait-frame img {
-    object-position: center top;
-    transform: scale(1.4);
-    transform-origin: center 30%;
+    min-height: 320px;
   }
 
   .card-grid,
@@ -1200,103 +1148,8 @@ textarea {
     grid-template-columns: 1fr;
   }
 
-  .card {
-    gap: 14px;
-    padding: 16px;
-    border-radius: 24px;
-  }
-
-  .card__title {
-    font-size: 1.26rem;
-  }
-
-  .card__title--logo {
-    min-height: 64px;
-  }
-
-  .card__title-logo-shell {
-    width: min(240px, 100%);
-    height: 50px;
-  }
-
-  .card__title-logo--google {
-    height: 68px;
-  }
-
-  .card__title-logo--campus-fund {
-    height: 74px;
-  }
-
-  .card__media {
-    min-height: 180px;
-  }
-
-  .card__research-meta {
-    flex-wrap: wrap;
-    gap: 6px 10px;
-  }
-
-  .card__research-year {
-    margin-left: 0;
-  }
-
-  .education-card {
-    gap: 16px;
-  }
-
-  .education-card__institution {
-    flex-wrap: wrap;
-  }
-
-  .education-card__title {
-    font-size: 1.35rem;
-  }
-
   .projects-carousel__controls {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .projects-carousel__button {
-    width: 100%;
-  }
-
-  .projects-carousel__indicator {
-    gap: 8px;
-  }
-
-  .social-links {
-    gap: 10px 16px;
-  }
-
-  .social-link {
-    font-size: 1rem;
-  }
-
-  .detail-page {
-    gap: 20px;
-    padding-top: 24px;
-  }
-
-  .detail-hero {
-    gap: 18px;
-  }
-
-  .detail-hero__title {
-    font-size: clamp(1.6rem, 8.2vw, 2.2rem);
-  }
-
-  .detail-hero__media {
-    min-height: 220px;
-  }
-
-  .detail-main__sections {
-    gap: 18px;
-    margin-top: 18px;
-  }
-
-  .detail-main__section + .detail-main__section {
-    padding-top: 18px;
+    justify-content: space-between;
   }
 
   .gpt-dock {
@@ -1315,84 +1168,6 @@ textarea {
     align-items: flex-start;
     flex-direction: column;
     padding-bottom: 8px;
-  }
-}
-
-@media (max-width: 560px) {
-  .site-main {
-    padding-bottom: 260px;
-  }
-
-  .site-header {
-    top: 6px;
-  }
-
-  .site-header__brand-copy small {
-    display: none;
-  }
-
-  .site-header__link {
-    font-size: 0.88rem;
-  }
-
-  .landing-page {
-    gap: 36px;
-  }
-
-  .hero__copy,
-  .hero__portrait-card,
-  .education-card,
-  .detail-hero,
-  .detail-sidebar__panel,
-  .detail-main__panel,
-  .not-found {
-    padding: 16px;
-  }
-
-  .hero__title {
-    font-size: clamp(1.45rem, 9vw, 1.8rem);
-  }
-
-  .hero__intro,
-  .card__summary,
-  .education-card__summary,
-  .detail-main__prose p {
-    line-height: 1.6;
-  }
-
-  .card__title-logo-shell {
-    width: min(200px, 100%);
-    height: 44px;
-  }
-
-  .card__title-logo--google {
-    height: 56px;
-  }
-
-  .card__title-logo--campus-fund {
-    height: 62px;
-  }
-
-  .projects-carousel__controls {
-    grid-template-columns: 1fr;
-    gap: 8px;
-  }
-
-  .gpt-dock__header {
-    gap: 8px;
-    padding: 12px 14px 6px;
-  }
-
-  .gpt-dock__body {
-    padding: 0 14px 10px;
-  }
-
-  .gpt-dock__form {
-    padding: 0 14px 14px;
-  }
-
-  .gpt-dock__ghost {
-    font-size: 0.9rem;
   }
 }
 
