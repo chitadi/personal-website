@@ -20,6 +20,7 @@ export function ChittemGptDock() {
   const [promptIndex, setPromptIndex] = useState(0);
   const [typedPrompt, setTypedPrompt] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
+  const dockRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -62,6 +63,29 @@ export function ChittemGptDock() {
 
     return () => window.clearTimeout(timer);
   }, [isDeleting, isFocused, promptIndex, question, typedPrompt]);
+
+  useEffect(() => {
+    function handlePointerDown(event: MouseEvent | TouchEvent) {
+      const target = event.target as Node | null;
+
+      if (!target || !dockRef.current || dockRef.current.contains(target)) {
+        return;
+      }
+
+      if (response || error) {
+        setResponse("");
+        setError("");
+      }
+    }
+
+    document.addEventListener("mousedown", handlePointerDown);
+    document.addEventListener("touchstart", handlePointerDown);
+
+    return () => {
+      document.removeEventListener("mousedown", handlePointerDown);
+      document.removeEventListener("touchstart", handlePointerDown);
+    };
+  }, [response, error]);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -107,7 +131,7 @@ export function ChittemGptDock() {
   }
 
   return (
-    <div className="gpt-dock">
+    <div className="gpt-dock" ref={dockRef}>
       <div className="gpt-dock__header">
         <span className="gpt-dock__label">ChittemGPT</span>
         <span className="gpt-dock__helper">Ask anything from the site</span>
