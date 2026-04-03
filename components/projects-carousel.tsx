@@ -178,13 +178,9 @@ export function ProjectsCarousel({ items }: ProjectsCarouselProps) {
         >
           {renderedSlides.map((project, index) => (
             <div key={`${project.slug}-${index}`} className="projects-carousel__slide">
-              <article className="card card--interactive">
+              <article className="card card--interactive card--full-link">
                 <div className="card__content">
-                  <h3 className="card__title">
-                    <Link href={`/projects/${project.slug}`} className="card__title-link">
-                      {project.title}
-                    </Link>
-                  </h3>
+                  <h3 className="card__title">{project.title}</h3>
                   {project.links?.[0]?.href ? (
                     <a
                       href={project.links[0].href}
@@ -197,6 +193,11 @@ export function ProjectsCarousel({ items }: ProjectsCarouselProps) {
                   ) : null}
                   <p className="card__summary">{project.summary}</p>
                 </div>
+                <Link
+                  href={`/projects/${project.slug}`}
+                  className="card__cover-link"
+                  aria-label={`Read project: ${project.title}`}
+                />
               </article>
             </div>
           ))}
