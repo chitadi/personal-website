@@ -144,25 +144,25 @@ export const education: EducationProfile = {
     {
       title: "Student Senator",
       paragraphs: [
-        "Use this subsection to document your tenure as Student Senator: what you represented, the discussions you led, and the concrete student outcomes that followed.",
+        "BITS Pilani's Senate is the highest decision making body of the entire institute, comprised of faculty members, administration and 4 student members, one from each campus. As the student senator of the Pilani Campus, I had the chance to represent student interests at the highest level and work closely with the administration to ensure that student concerns were heard and addressed. I stepped into the role at what was the most tumultuous time in recent history for BITS Pilani, when the Senate decided to introduce an attendance policy for the first time ever. We had to work with students and the administration across campuses to reach a middle ground that currently persists today. Was easily the most intimidating experience I had in college, dealing with bueraucracy and the expectations of students alike, but the role has significantly more importance now, and a lot of the work that I have put in will (hopefully) improve the lives of students for the next couple of years.",
       ],
     },
     {
       title: "Center for Entrepreneurial Leadership (CEL)",
       paragraphs: [
-        "Add your CEL journey here: initiatives you drove, events or programs you helped run, and how you supported founders or the startup community on campus.",
+        "At what is probably BITS Pilani's most coveted student club, I worked on CEL's various initiatives throughout my three years there. From Conquest, India's largest student run startup accelerator, to CEL's Innovation Fund, our own Venture Capital Arm, to also leading learning iniaitives within the club, I got to experience the world of startups and entrepreneurship in a way that no classroom could have ever taught me. I met some incredible batchies, senior and juniors, and CEL will always be what I'm most proud of from my college life. Easy to say my life in college would not be the same without it, and pulling off initiatives at the scale that CEL does, brings you out of your bubble on campus and really shows you how things work in the real world.",
       ],
     },
     {
       title: "180 Degrees Consulting (180DC)",
       paragraphs: [
-        "Capture your consulting work here, including project scope, client context, problem-solving approach, and the impact of your recommendations.",
+        "At 180DC, I had the opportunity to work with real clients on real consulting projects. I worked with India's largest NGO, to help them strategize the rollout of one of their largest childcare programs. We handled everything from program planning to final execution as well. But the most exciting experience was when I had the chance to lead a project for an up and coming FMCG startup, where we led their entire product pivot strategy and helped them figure out what their new product should look like, how they should position it and who they should target. They ended up going on the Indian Shark Tank and we got to see our work come to life on national television which was super exciting!",
       ],
     },
     {
       title: "Conquest, BITS Pilani",
       paragraphs: [
-        "Use this space for your Conquest experience: responsibilities, operator workflows, founder interactions, and standout moments from the event cycle.",
+        "I had the privilege of being a part of one of the most talented student organisations that pulled off India's largest student run startup accelerator, Conquest by BITS Pilani. I was a part of the Finance and Investment Partnerships division, securing crucial partnerships with VC firms and investors that helped us raise 31 lakhs to fund the accelerator. I also got to work closely with the startups in our portfolio, providing them with mentorship and support whenever they needed it. Easily the coolest thing a first year student could experience, watching in real-time, over the course of 6 weeks, how startups evolve, function and operate outside of the classroom.",
       ],
     },
     {
