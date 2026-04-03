@@ -1505,7 +1505,19 @@ textarea {
     border-width: 1px;
     border-radius: 18px;
     box-shadow: 0 12px 24px rgba(43, 25, 10, 0.16);
+    transition:
+      bottom 220ms ease,
+      border-color 220ms ease,
+      box-shadow 220ms ease;
     transform: none;
+  }
+
+  .gpt-dock--spotlight {
+    bottom: 26px;
+    border-color: rgba(95, 62, 39, 0.52);
+    box-shadow:
+      0 22px 38px rgba(43, 25, 10, 0.28),
+      0 0 0 1px rgba(145, 96, 67, 0.24);
   }
 
   .gpt-dock__header {

@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -10,8 +11,11 @@ const TYPING_DELAY = 95;
 const BACKSPACE_DELAY = 42;
 const PAUSE_AFTER_TYPED = 1600;
 const PAUSE_AFTER_ERASED = 340;
+const MOBILE_MEDIA_QUERY = "(max-width: 760px)";
+const SPOTLIGHT_SCROLL_THRESHOLD = 24;
 
 export function ChittemGptDock() {
+  const pathname = usePathname();
   const [question, setQuestion] = useState("");
   const [response, setResponse] = useState("");
   const [error, setError] = useState("");
@@ -20,6 +24,8 @@ export function ChittemGptDock() {
   const [promptIndex, setPromptIndex] = useState(0);
   const [typedPrompt, setTypedPrompt] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isMobileViewport, setIsMobileViewport] = useState(false);
+  const [isAtTopOfPage, setIsAtTopOfPage] = useState(true);
   const dockRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -63,6 +69,34 @@ export function ChittemGptDock() {
 
     return () => window.clearTimeout(timer);
   }, [isDeleting, isFocused, promptIndex, question, typedPrompt]);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia(MOBILE_MEDIA_QUERY);
+
+    function handleMediaChange(event: MediaQueryListEvent) {
+      setIsMobileViewport(event.matches);
+    }
+
+    setIsMobileViewport(mediaQuery.matches);
+    mediaQuery.addEventListener("change", handleMediaChange);
+
+    return () => {
+      mediaQuery.removeEventListener("change", handleMediaChange);
+    };
+  }, []);
+
+  useEffect(() => {
+    function updateScrollState() {
+      setIsAtTopOfPage(window.scrollY <= SPOTLIGHT_SCROLL_THRESHOLD);
+    }
+
+    updateScrollState();
+    window.addEventListener("scroll", updateScrollState, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", updateScrollState);
+    };
+  }, [pathname]);
 
   useEffect(() => {
     function handlePointerDown(event: MouseEvent | TouchEvent) {
@@ -130,8 +164,11 @@ export function ChittemGptDock() {
     }
   }
 
+  const isSpotlightVisible = isMobileViewport && pathname === "/" && isAtTopOfPage;
+  const dockClassName = `gpt-dock${isSpotlightVisible ? " gpt-dock--spotlight" : ""}`;
+
   return (
-    <div className="gpt-dock" ref={dockRef}>
+    <div className={dockClassName} ref={dockRef}>
       <div className="gpt-dock__header">
         <span className="gpt-dock__label">ChittemGPT</span>
         <span className="gpt-dock__helper">Ask anything from the site</span>
