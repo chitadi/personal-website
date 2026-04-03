@@ -56,7 +56,6 @@ export function SiteHeader() {
           <span className="site-header__brand-mark">C</span>
           <span className="site-header__brand-copy">
             <strong>Chittem</strong>
-            <small>Personal website</small>
           </span>
         </Link>
 
