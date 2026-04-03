@@ -187,7 +187,7 @@ export default function HomePage() {
                         target="_blank"
                         rel="noreferrer"
                       >
-                        {item.links[0].href.replace(/^https?:\/\//, "")}
+                        {item.publication}
                       </a>
                     ) : null}
                     <span className="card__research-year">{item.year}</span>
@@ -223,7 +223,7 @@ export default function HomePage() {
                           target="_blank"
                           rel="noreferrer"
                         >
-                          {item.links[0].href.replace(/^https?:\/\//, "")}
+                          {item.publication}
                         </a>
                       ) : null}
                       <span className="card__research-year">{item.year}</span>
