@@ -1,56 +1,81 @@
 "use client";
 
-import Link from "next/link";
-import { type TouchEvent, useCallback, useEffect, useRef, useState } from "react";
+import { type ReactNode, type TouchEvent, useCallback, useEffect, useRef, useState } from "react";
 
-import type { ProjectItem } from "@/content/site-data";
-
-const AUTO_ADVANCE_MS = 4000;
+const AUTO_ADVANCE_MS = 4500;
 const SWIPE_THRESHOLD = 36;
+const MOBILE_MEDIA_QUERY = "(max-width: 760px)";
 
-type ProjectsCarouselProps = {
-  items: ProjectItem[];
+type MobileSlideCarouselProps = {
+  ariaLabel: string;
+  dotLabelPrefix: string;
+  slides: ReactNode[];
+  slideKeys: string[];
+  autoAdvanceMs?: number;
 };
 
-export function ProjectsCarousel({ items }: ProjectsCarouselProps) {
-  const totalProjects = items.length;
-  const hasMultipleProjects = totalProjects > 1;
+export function MobileSlideCarousel({
+  ariaLabel,
+  dotLabelPrefix,
+  slides,
+  slideKeys,
+  autoAdvanceMs = AUTO_ADVANCE_MS,
+}: MobileSlideCarouselProps) {
+  const totalSlides = slides.length;
+  const hasMultipleSlides = totalSlides > 1;
   const [activeIndex, setActiveIndex] = useState(0);
-  const [trackIndex, setTrackIndex] = useState(() => (totalProjects > 1 ? 1 : 0));
+  const [trackIndex, setTrackIndex] = useState(() => (totalSlides > 1 ? 1 : 0));
   const [isAnimating, setIsAnimating] = useState(false);
   const [isTransitionEnabled, setIsTransitionEnabled] = useState(true);
+  const [isMobileViewport, setIsMobileViewport] = useState(false);
   const touchStartXRef = useRef<number | null>(null);
   const touchStartYRef = useRef<number | null>(null);
 
-  const renderedSlides = hasMultipleProjects
-    ? [items[totalProjects - 1], ...items, items[0]]
-    : items;
+  useEffect(() => {
+    const mediaQuery = window.matchMedia(MOBILE_MEDIA_QUERY);
+
+    function handleMediaChange(event: MediaQueryListEvent) {
+      setIsMobileViewport(event.matches);
+    }
+
+    setIsMobileViewport(mediaQuery.matches);
+    mediaQuery.addEventListener("change", handleMediaChange);
+
+    return () => {
+      mediaQuery.removeEventListener("change", handleMediaChange);
+    };
+  }, []);
+
+  const renderedSlides = hasMultipleSlides ? [slides[totalSlides - 1], ...slides, slides[0]] : slides;
+  const renderedSlideKeys = hasMultipleSlides
+    ? [slideKeys[totalSlides - 1], ...slideKeys, slideKeys[0]]
+    : slideKeys;
 
   const goToNext = useCallback(() => {
-    if (!hasMultipleProjects || isAnimating) {
+    if (!hasMultipleSlides || isAnimating || !isMobileViewport) {
       return;
     }
 
     setIsAnimating(true);
     setIsTransitionEnabled(true);
     setTrackIndex((current) => current + 1);
-    setActiveIndex((current) => (current + 1) % totalProjects);
-  }, [hasMultipleProjects, isAnimating, totalProjects]);
+    setActiveIndex((current) => (current + 1) % totalSlides);
+  }, [hasMultipleSlides, isAnimating, isMobileViewport, totalSlides]);
 
   const goToPrevious = useCallback(() => {
-    if (!hasMultipleProjects || isAnimating) {
+    if (!hasMultipleSlides || isAnimating || !isMobileViewport) {
       return;
     }
 
     setIsAnimating(true);
     setIsTransitionEnabled(true);
     setTrackIndex((current) => current - 1);
-    setActiveIndex((current) => (current - 1 + totalProjects) % totalProjects);
-  }, [hasMultipleProjects, isAnimating, totalProjects]);
+    setActiveIndex((current) => (current - 1 + totalSlides) % totalSlides);
+  }, [hasMultipleSlides, isAnimating, isMobileViewport, totalSlides]);
 
   const goToIndex = useCallback(
     (index: number) => {
-      if (!hasMultipleProjects || isAnimating || index === activeIndex) {
+      if (!hasMultipleSlides || isAnimating || index === activeIndex || !isMobileViewport) {
         return;
       }
 
@@ -59,22 +84,22 @@ export function ProjectsCarousel({ items }: ProjectsCarouselProps) {
       setTrackIndex(index + 1);
       setActiveIndex(index);
     },
-    [activeIndex, hasMultipleProjects, isAnimating],
+    [activeIndex, hasMultipleSlides, isAnimating, isMobileViewport],
   );
 
   useEffect(() => {
-    if (!hasMultipleProjects || isAnimating) {
+    if (!hasMultipleSlides || isAnimating || !isMobileViewport) {
       return undefined;
     }
 
     const timeoutId = window.setTimeout(() => {
       goToNext();
-    }, AUTO_ADVANCE_MS);
+    }, autoAdvanceMs);
 
     return () => {
       window.clearTimeout(timeoutId);
     };
-  }, [activeIndex, goToNext, hasMultipleProjects, isAnimating]);
+  }, [activeIndex, autoAdvanceMs, goToNext, hasMultipleSlides, isAnimating, isMobileViewport]);
 
   useEffect(() => {
     if (isTransitionEnabled) {
@@ -96,7 +121,18 @@ export function ProjectsCarousel({ items }: ProjectsCarouselProps) {
     };
   }, [isTransitionEnabled]);
 
-  if (!totalProjects) {
+  useEffect(() => {
+    if (isMobileViewport || !hasMultipleSlides) {
+      return;
+    }
+
+    setIsAnimating(false);
+    setIsTransitionEnabled(true);
+    setActiveIndex(0);
+    setTrackIndex(1);
+  }, [hasMultipleSlides, isMobileViewport]);
+
+  if (!totalSlides) {
     return null;
   }
 
@@ -105,18 +141,18 @@ export function ProjectsCarousel({ items }: ProjectsCarouselProps) {
   }`;
 
   function handleTrackTransitionEnd() {
-    if (!hasMultipleProjects || !isAnimating) {
+    if (!hasMultipleSlides || !isAnimating || !isMobileViewport) {
       return;
     }
 
     if (trackIndex === 0) {
       setIsTransitionEnabled(false);
-      setTrackIndex(totalProjects);
+      setTrackIndex(totalSlides);
       setIsAnimating(false);
       return;
     }
 
-    if (trackIndex === totalProjects + 1) {
+    if (trackIndex === totalSlides + 1) {
       setIsTransitionEnabled(false);
       setTrackIndex(1);
       setIsAnimating(false);
@@ -165,7 +201,7 @@ export function ProjectsCarousel({ items }: ProjectsCarouselProps) {
   }
 
   return (
-    <div className="projects-carousel" aria-roledescription="carousel" aria-label="Projects">
+    <div className="projects-carousel" aria-roledescription="carousel" aria-label={ariaLabel}>
       <div
         className="projects-carousel__viewport"
         onTouchStart={handleTouchStart}
@@ -176,65 +212,27 @@ export function ProjectsCarousel({ items }: ProjectsCarouselProps) {
           style={{ transform: `translateX(-${trackIndex * 100}%)` }}
           onTransitionEnd={handleTrackTransitionEnd}
         >
-          {renderedSlides.map((project, index) => (
-            <div key={`${project.slug}-${index}`} className="projects-carousel__slide">
-              <article className="card card--interactive">
-                <div className="card__content">
-                  <h3 className="card__title">
-                    <Link href={`/projects/${project.slug}`} className="card__title-link">
-                      {project.title}
-                    </Link>
-                  </h3>
-                  {project.links?.[0]?.href ? (
-                    <a
-                      href={project.links[0].href}
-                      className="text-link card__link"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      {project.links[0].href.replace(/^https?:\/\//, "")}
-                    </a>
-                  ) : null}
-                  <p className="card__summary">{project.summary}</p>
-                </div>
-              </article>
+          {renderedSlides.map((slide, index) => (
+            <div
+              key={`${renderedSlideKeys[index] ?? `slide-${index}`}-${index}`}
+              className="projects-carousel__slide"
+            >
+              {slide}
             </div>
           ))}
         </div>
       </div>
 
-      <div className="projects-carousel__controls">
-        <button
-          type="button"
-          className="projects-carousel__button"
-          onClick={goToPrevious}
-          aria-label="Show previous project"
-          disabled={!hasMultipleProjects || isAnimating}
-        >
-          Previous
-        </button>
-
-        <button
-          type="button"
-          className="projects-carousel__button"
-          onClick={goToNext}
-          aria-label="Show next project"
-          disabled={!hasMultipleProjects || isAnimating}
-        >
-          Next
-        </button>
-      </div>
-
       <div className="projects-carousel__indicator">
-        <div className="projects-carousel__dots" aria-label="Project position">
-          {items.map((item, index) => (
+        <div className="projects-carousel__dots" aria-label={`${dotLabelPrefix} position`}>
+          {slideKeys.map((key, index) => (
             <button
-              key={item.slug}
+              key={key}
               type="button"
               className={`projects-carousel__dot${
                 index === activeIndex ? " projects-carousel__dot--active" : ""
               }`}
-              aria-label={`Go to project ${index + 1}: ${item.title}`}
+              aria-label={`Go to ${dotLabelPrefix} ${index + 1}`}
               aria-current={index === activeIndex ? "true" : undefined}
               disabled={isAnimating}
               onClick={() => goToIndex(index)}

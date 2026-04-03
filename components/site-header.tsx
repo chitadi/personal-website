@@ -9,6 +9,11 @@ import { primarySections } from "@/content/site-data";
 export function SiteHeader() {
   const pathname = usePathname();
   const [activeSection, setActiveSection] = useState(primarySections[0]?.id ?? "");
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [pathname]);
 
   useEffect(() => {
     if (pathname !== "/") {
@@ -55,7 +60,28 @@ export function SiteHeader() {
           </span>
         </Link>
 
-        <nav className="site-header__nav" aria-label="Primary">
+        <button
+          type="button"
+          className={`site-header__menu-toggle${
+            isMenuOpen ? " site-header__menu-toggle--open" : ""
+          }`}
+          onClick={() => setIsMenuOpen((current) => !current)}
+          aria-controls="site-primary-nav"
+          aria-expanded={isMenuOpen}
+          aria-label={isMenuOpen ? "Close section menu" : "Open section menu"}
+        >
+          <span className="site-header__menu-icon" aria-hidden="true">
+            <span />
+            <span />
+            <span />
+          </span>
+        </button>
+
+        <nav
+          id="site-primary-nav"
+          className={`site-header__nav${isMenuOpen ? " site-header__nav--open" : ""}`}
+          aria-label="Primary"
+        >
           {primarySections.map((section) => {
             const href = pathname === "/" ? `/#${section.id}` : `/#${section.id}`;
             const isActive = pathname === "/" && activeSection === section.id;
@@ -65,6 +91,7 @@ export function SiteHeader() {
                 key={section.id}
                 href={href}
                 className={`site-header__link ${isActive ? "site-header__link--active" : ""}`}
+                onClick={() => setIsMenuOpen(false)}
               >
                 {section.label}
               </Link>
@@ -75,4 +102,3 @@ export function SiteHeader() {
     </header>
   );
 }
-

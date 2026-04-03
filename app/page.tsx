@@ -7,6 +7,7 @@ import googleLogo from "@/app/figs/Google-logo.png";
 import oracleLogo from "@/app/figs/Oracle_logo.svg.png";
 import heroPortrait from "@/app/figs/pfp.jpeg";
 import { JsonLd } from "@/components/json-ld";
+import { MobileSlideCarousel } from "@/components/mobile-slide-carousel";
 import { ProjectsCarousel } from "@/components/projects-carousel";
 import { SectionCard } from "@/components/section-card";
 import { SocialIcon } from "@/components/social-icon";
@@ -76,7 +77,8 @@ export default function HomePage() {
             <h1 id="hero-title" className="hero__title">
               {hero.title}
             </h1>
-            <p className="hero__intro">{hero.intro}</p>
+            <p className="hero__intro hero__intro--desktop">{hero.intro}</p>
+            <p className="hero__intro hero__intro--mobile">{hero.introMobile ?? hero.intro}</p>
           </div>
 
           <div className="hero__portrait-card">
@@ -100,7 +102,7 @@ export default function HomePage() {
             </h2>
           </div>
 
-          <div className="card-grid">
+          <div className="card-grid mobile-grid-only">
             {workItems.map((item) => (
               <SectionCard
                 key={item.slug}
@@ -112,6 +114,25 @@ export default function HomePage() {
                 meta={[item.period, item.location]}
               />
             ))}
+          </div>
+
+          <div className="mobile-carousel-only">
+            <MobileSlideCarousel
+              ariaLabel="Work experience cards"
+              dotLabelPrefix="work card"
+              slideKeys={workItems.map((item) => item.slug)}
+              slides={workItems.map((item) => (
+                <SectionCard
+                  key={item.slug}
+                  href={`/work/${item.slug}`}
+                  eyebrow={item.role}
+                  title={item.company}
+                  titleLogo={workLogoBySlug[item.slug]}
+                  summary={item.summary}
+                  meta={[item.period, item.location]}
+                />
+              ))}
+            />
           </div>
         </section>
 
@@ -135,7 +156,12 @@ export default function HomePage() {
               </div>
               <h3 className="education-card__title">{education.degree}</h3>
               <p className="education-card__period">{education.period}</p>
-              <p className="education-card__summary">{education.summary}</p>
+              <p className="education-card__summary education-card__summary--desktop">
+                {education.summary}
+              </p>
+              <p className="education-card__summary education-card__summary--mobile">
+                {education.summaryMobile ?? education.summary}
+              </p>
             </div>
           </Link>
         </section>
@@ -148,15 +174,11 @@ export default function HomePage() {
             </h2>
           </div>
 
-          <div className="card-grid card-grid--two">
+          <div className="card-grid card-grid--two mobile-grid-only">
             {researchItems.map((item) => (
-              <article key={item.slug} className="card card--research card--interactive">
+              <article key={item.slug} className="card card--research card--interactive card--full-link">
                 <div className="card__content card__content--research">
-                  <h3 className="card__title">
-                    <Link href={`/research/${item.slug}`} className="card__title-link">
-                      {item.title}
-                    </Link>
-                  </h3>
+                  <h3 className="card__title">{item.title}</h3>
                   <div className="card__research-meta">
                     {item.links?.[0]?.href ? (
                       <a
@@ -172,8 +194,52 @@ export default function HomePage() {
                   </div>
                   <p className="card__summary card__summary--compact">{item.summary}</p>
                 </div>
+                <Link
+                  href={`/research/${item.slug}`}
+                  className="card__cover-link"
+                  aria-label={`Read research item: ${item.title}`}
+                />
               </article>
             ))}
+          </div>
+
+          <div className="mobile-carousel-only">
+            <MobileSlideCarousel
+              ariaLabel="Research cards"
+              dotLabelPrefix="research card"
+              slideKeys={researchItems.map((item) => item.slug)}
+              slides={researchItems.map((item) => (
+                <article
+                  key={item.slug}
+                  className="card card--research card--interactive card--full-link"
+                >
+                  <div className="card__content card__content--research">
+                    <h3 className="card__title">{item.title}</h3>
+                    <div className="card__research-meta">
+                      {item.links?.[0]?.href ? (
+                        <a
+                          href={item.links[0].href}
+                          className="text-link card__link"
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          {item.links[0].href.replace(/^https?:\/\//, "")}
+                        </a>
+                      ) : null}
+                      <span className="card__research-year">{item.year}</span>
+                    </div>
+                    <p className="card__summary card__summary--compact">
+                      {item.summaryMobile ?? item.summary}
+                    </p>
+                  </div>
+                  <Link
+                    href={`/research/${item.slug}`}
+                    className="card__cover-link"
+                    aria-label={`Read research item: ${item.title}`}
+                  />
+                </article>
+              ))}
+            />
           </div>
         </section>
 

@@ -55,6 +55,7 @@ export type EducationProfile = {
   degree: string;
   period: string;
   summary: string;
+  summaryMobile?: string;
   highlights: string[];
   narrative: DetailParagraph[];
   sections: DetailSection[];
@@ -90,6 +91,7 @@ export type ResearchItem = {
   publication: string;
   year: string;
   summary: string;
+  summaryMobile?: string;
   keywords: string[];
   highlights: string[];
   abstract: DetailParagraph[];
@@ -112,7 +114,10 @@ export const hero = {
     "I mostly go by my last name, pronounced Chith-um (actually Chit-tem but someone in the 4th grade decided it was wrong and it has stuck ever since). " +
     "I'm currently in my senior year of pursuing a Bachelor's in Computer Science at BITS Pilani and also interning as a Software Engineer at Google India." + 
     " You can find everything that I do here, from work experience to projects and research. You should also be able to see a little chatbot at the bottom of your screen, yes it's real and capable of" +
-    " answering questions about me. Feel free to reach out to me on my socials at the bottom of the page!"
+    " answering questions about me. Feel free to reach out to me on my socials at the bottom of the page!",
+  introMobile:
+    "Hello! I'm currently in my senior year of Bachelor's in Computer Science at BITS Pilani and also interning as a Software Engineer at Google India." + 
+    " You can find everything that I do here - work, projects, research and more!"
 };
 
 export const education: EducationProfile = {
@@ -120,6 +125,8 @@ export const education: EducationProfile = {
   degree: "Bachelor's of Engineering in Computer Science",
   period: "October 2022 - I have a few months left",
   summary: "Will (somehow) graduate with an 8.81 GPA. I spent a lot of time with the Center for Entrepreneurial Leadership and 180 Degrees Consulting, worked on ML/DL research projects with three different professors, and currently serve as the student representative on the BITS Pilani Senate.",
+  summaryMobile:
+    "Will (somehow) graduate with an 8.81 GPA. I spent a lot of time with the CEL, 180DC, worked on numerous DL research projects, and currently serve as the Student Senator of BITS Pilani.",
   highlights: [
     "Student Senator",
     "Center for Entrepreneurial Leadership (CEL)",
@@ -369,6 +376,8 @@ export const researchItems: ResearchItem[] = [
     year: "2025",
     summary:
       "Introduced Specific Attribute Control (SAC), extending MPI from the Big Five to 16PF so LLM personalities can be measured and steered across 16 fine-grained traits with explicit intensity levels. Experiments show continuous intensity control is more reliable than binary toggles and causes coherent shifts in related traits, enabling more nuanced human-machine interactions.",
+    summaryMobile:
+      "Introduced Specific Attribute Control, so LLM personalities can be measured and steered across 16 traits with explicit intensity levels. We show that continuous intensity control is more reliable than binary toggles, enabling more nuanced human-machine interactions.",
     keywords: ["Research", "Publication", "Placeholder"],
     highlights: [
       "State the research problem in plain language.",
@@ -404,6 +413,8 @@ export const researchItems: ResearchItem[] = [
     year: "2026",
     summary:
       "Built a two-stage RAD-GAN pipeline to reconstruct intelligible full-band speech from noisy, band-limited mmWave captures (-5 dB to -1 dB), with a radar-tailored Multi-Mel Discriminator and Residual Fusion Gate. Even with limited data, no pre-trained modules, and no augmentations, the method outperformed SOTA approaches for this task.",
+    summaryMobile:
+      "Built a two-stage RAD-GAN pipeline to reconstruct intelligible full-band speech from noisy, band-limited mmWave captures, with a radar-tailored Multi-Mel Discriminator and Residual Fusion Gate, outperforming SOTA approaches for this task.",
     keywords: ["Research", "Writing", "Placeholder"],
     highlights: [
       "Name the question the paper tried to answer.",
@@ -414,7 +425,7 @@ export const researchItems: ResearchItem[] = [
       "Regular microphones capture audio waves through the air, radar sensors on the other hand capture the surface vibrations to capture millimeter waves. These waves are then processed to produce intelligible speech. Now, the issue with radar capture is that the environments are generally extremely noisy, making audio reconstruction a near impossible task, especially in scenarios with low SNR (Signal to Noise Ratio). Our work tries to solve this problem by introducing a novel two-stage Radar Aware Dual Path-Generative Adversarial Network (RAD-GAN) pipeline that is specifically designed to handle the unique challenges of mmWave radar captures",
       "What makes our work stand out is that we designed a radar-tailored Multi-Mel Discriminator and a Residual Fusion Gate to effectively reconstruct intelligible full-band speech from noisy, band-limited mmWave captures with SNRs as low as -5 dB. Even with limited data, no pre-trained modules, and no augmentations, our method outperformed state-of-the-art approaches for this task.",
       "This research has significant implications for the development of more robust and effective speech reconstruction techniques in noisy environments, which could have applications in various fields such as telecommunications, assistive technologies, and surveillance.",
-      "The work is currently under review for publication in Interspeech 2026, and we have also made a preprint available on arXiv for the community to access and build upon. We have also built a demo website with the output spectrograms, comparison with baselines and even audio outputs so that you cant ake a look at what the output from the models we built sound like! Check it out here - https://rad-gan-demo-site.vercel.app/.",
+      "The work is currently under review for publication in Interspeech 2026, and we have also made a preprint available on arXiv for the community to access and build upon. We have also built a demo website with the output spectrograms, comparison with baselines and even audio outputs so that you cant ake a look at what the output from the models we built sound like! Check it out [here](https://rad-gan-demo-site.vercel.app/).",
       "This work was done by myself and two of my wingies - Deepan Roy and Jash Karani, along with the kind support of Prof. Sandeep Joshi. Looking back, this work is by far and easily the coolest thing I've managed to do over the course of my 4 years of undergrad.",
       "Deepan and I had a little bit of experience dabbling around with DL frameworks but we had never built anything even remotely from scratch ourselves. Jash is an Electronics and Comms. Engineer that focussed on the Digital Signal Processing aspect of the work. I never thought I'd get to collaborate with someone from a completely different field than mine, that too on a project that is so technically dense.",
       "We have a few more ideas on where to take this work, but for now we hope we can make it to Australia for Interspeech 2026!"

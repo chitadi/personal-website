@@ -140,6 +140,7 @@ export function DetailPage({
 }: DetailPageProps) {
   const hasSidebar = Boolean(links?.length);
   const sidebarLinks = links ?? [];
+  const hasLinks = sidebarLinks.length > 0;
   const hasMeta = Boolean(meta?.length);
   const mediaItems = media ?? [];
   const sectionItems = sections ?? [];
@@ -164,6 +165,26 @@ export function DetailPage({
               ))}
             </div>
           ) : null}
+          {hasLinks ? (
+            <div className="detail-hero__links" aria-label={`${title} links`}>
+              {sidebarLinks.map((link) => {
+                const isExternal = !link.href.startsWith("/");
+
+                return (
+                  <a
+                    key={`hero-${link.label}-${link.href}`}
+                    href={link.href}
+                    className="detail-link-chip"
+                    target={isExternal ? "_blank" : undefined}
+                    rel={isExternal ? "noreferrer" : undefined}
+                  >
+                    {link.label}
+                    {isExternal ? <span aria-hidden="true">↗</span> : null}
+                  </a>
+                );
+              })}
+            </div>
+          ) : null}
         </div>
         {image ? (
           <div className="detail-hero__media">
@@ -176,19 +197,23 @@ export function DetailPage({
         {hasSidebar ? (
           <aside className="detail-sidebar">
             <section className="detail-sidebar__panel">
-              <p className="detail-sidebar__title">Links</p>
               <div className="detail-sidebar__links">
-                {sidebarLinks.map((link) => (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    className="text-link"
-                    target={link.href.startsWith("/") ? undefined : "_blank"}
-                    rel={link.href.startsWith("/") ? undefined : "noreferrer"}
-                  >
-                    {link.label}
-                  </a>
-                ))}
+                {sidebarLinks.map((link) => {
+                  const isExternal = !link.href.startsWith("/");
+
+                  return (
+                    <a
+                      key={`sidebar-${link.label}-${link.href}`}
+                      href={link.href}
+                      className="detail-link-chip"
+                      target={isExternal ? "_blank" : undefined}
+                      rel={isExternal ? "noreferrer" : undefined}
+                    >
+                      {link.label}
+                      {isExternal ? <span aria-hidden="true">↗</span> : null}
+                    </a>
+                  );
+                })}
               </div>
             </section>
           </aside>
