@@ -1094,6 +1094,57 @@ textarea {
   background: rgba(255, 252, 247, 0.72);
 }
 
+.gpt-dock__response--markdown > :first-child {
+  margin-top: 0;
+}
+
+.gpt-dock__response--markdown > :last-child {
+  margin-bottom: 0;
+}
+
+.gpt-dock__response--markdown p {
+  margin: 0 0 0.6em;
+}
+
+.gpt-dock__response--markdown ul,
+.gpt-dock__response--markdown ol {
+  margin: 0.28em 0 0.62em 1.2em;
+  padding: 0;
+}
+
+.gpt-dock__response--markdown li + li {
+  margin-top: 0.14em;
+}
+
+.gpt-dock__response--markdown a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 0.16em;
+}
+
+.gpt-dock__response--markdown code {
+  padding: 0.08em 0.36em;
+  border-radius: 6px;
+  background: rgba(103, 71, 51, 0.12);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 0.9em;
+}
+
+.gpt-dock__response--markdown pre {
+  margin: 0 0 0.7em;
+  padding: 10px 11px;
+  border-radius: 10px;
+  border: 1px solid rgba(103, 71, 51, 0.16);
+  background: rgba(249, 241, 228, 0.9);
+  overflow-x: auto;
+}
+
+.gpt-dock__response--markdown pre code {
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+}
+
 .gpt-dock__response--error {
   color: #8c3d2d;
 }

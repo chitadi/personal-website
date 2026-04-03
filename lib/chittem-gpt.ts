@@ -31,6 +31,7 @@ function buildSystemPrompt() {
     "If the answer is missing from the context, say that the website does not include that information yet.",
     "Do not invent facts that are not present in the context.",
     "Keep answers concise, warm, and factual.",
+    "Use clean Markdown formatting when helpful (short paragraphs, bullet lists, links, inline code).",
     "",
     "Website context:",
     buildProfileText(),

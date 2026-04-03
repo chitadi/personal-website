@@ -1,6 +1,8 @@
 "use client";
 
 import { FormEvent, useEffect, useRef, useState } from "react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 import { suggestedPrompts } from "@/content/site-data";
 
@@ -114,7 +116,20 @@ export function ChittemGptDock() {
       {(response || error || isLoading) ? (
         <div className="gpt-dock__body">
           {isLoading ? <p className="gpt-dock__response">Thinking...</p> : null}
-          {response ? <p className="gpt-dock__response">{response}</p> : null}
+          {response ? (
+            <div className="gpt-dock__response gpt-dock__response--markdown">
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                components={{
+                  a: ({ node: _node, ...props }) => (
+                    <a {...props} target="_blank" rel="noreferrer" />
+                  ),
+                }}
+              >
+                {response}
+              </ReactMarkdown>
+            </div>
+          ) : null}
           {error ? <p className="gpt-dock__response gpt-dock__response--error">{error}</p> : null}
         </div>
       ) : null}
